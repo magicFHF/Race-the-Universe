@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>Race the Universe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0c0f16;--panel:rgba(16,20,30,.78);--solid:#141a26;--line:rgba(255,255,255,.12);--ink:#f2f5fa;--dim:#8f9bb3;--accent:#f5b83d;--good:#34d399;--bad:#f0616d;--blue:#4cc2ff;
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -120,6 +123,59 @@ input[type=range]{width:160px;accent-color:#f5b83d}
 body.is-title #hud,body.is-title #gear,body.is-title #touch{display:none!important}
 .start .kicker,.start .tag,.start .stat{color:#e4eafb;text-shadow:0 1px 10px rgba(0,0,0,.7)}
 .start .btn:not(.pri){background:rgba(20,24,38,.62)}
+/* ===== Race the Universe: Cockpit-Oberfläche ===== */
+:root,:root:not([data-theme="light"]),:root[data-theme="dark"]{--bg:#04050d;--solid:#0a1022;--panel:rgba(8,13,32,.7);--line:rgba(130,175,255,.2);--ink:#e9f0ff;--dim:#8c9cc6;--accent:#ffb347;--good:#3fe0a0;--bad:#ff5c72;--blue:#5fdcff;--cy:rgba(95,220,255,.8)}
+html,body{background:var(--bg);font:14px/1.5 'Chakra Petch','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif}
+button,textarea,input{font-family:inherit}
+.hp,.panel{position:relative}
+.hp{position:absolute;border-radius:3px;background:var(--panel);border-color:rgba(130,175,255,.16)}
+.hp::before,.panel::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;z-index:3;background:
+ linear-gradient(var(--cy),var(--cy)) 0 0/14px 2px no-repeat,linear-gradient(var(--cy),var(--cy)) 0 0/2px 14px no-repeat,
+ linear-gradient(var(--cy),var(--cy)) 100% 0/14px 2px no-repeat,linear-gradient(var(--cy),var(--cy)) 100% 0/2px 14px no-repeat,
+ linear-gradient(var(--cy),var(--cy)) 0 100%/14px 2px no-repeat,linear-gradient(var(--cy),var(--cy)) 0 100%/2px 14px no-repeat,
+ linear-gradient(var(--cy),var(--cy)) 100% 100%/14px 2px no-repeat,linear-gradient(var(--cy),var(--cy)) 100% 100%/2px 14px no-repeat}
+.panel{border-radius:4px;border-color:rgba(130,175,255,.14);background:
+ radial-gradient(1px 1px at 12% 18%,rgba(255,255,255,.55),transparent),radial-gradient(1px 1px at 78% 34%,rgba(255,255,255,.4),transparent),radial-gradient(1.5px 1.5px at 44% 82%,rgba(160,200,255,.5),transparent),radial-gradient(1px 1px at 90% 90%,rgba(255,255,255,.35),transparent),radial-gradient(1px 1px at 30% 55%,rgba(255,255,255,.3),transparent),linear-gradient(180deg,#0e1633,#070b1c);box-shadow:0 24px 70px rgba(0,0,0,.65)}
+.panel h1{font-style:italic;font-weight:700;letter-spacing:.01em;font-size:20px}
+.panel h2{display:flex;align-items:center;gap:8px;font-weight:600;color:#c4d2f4}
+.btn{border-radius:3px;background:rgba(120,170,255,.08);border-color:rgba(130,175,255,.28);font-weight:600;letter-spacing:.01em}
+.btn:hover{background:rgba(120,170,255,.16)}
+.btn.pri{background:linear-gradient(180deg,#ffc468,#f29a22);color:#1a1002}
+.btn.pri:hover{background:linear-gradient(180deg,#ffd07e,#f7a830)}
+.btn.sel{background:rgba(255,179,71,.14);border-color:var(--accent);color:var(--accent)}
+.pips i.own{background:rgba(255,179,71,.35)}
+.pips i.on{background:var(--accent)}
+.tabs .btn{border-radius:3px 3px 0 0}
+.bar{height:12px;border-radius:2px;background:rgba(130,175,255,.12)}
+.bar i{border-radius:0}
+.bar::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 11px,rgba(5,8,20,.85) 11px 12px);pointer-events:none}
+.bar b{z-index:2;font-weight:600;letter-spacing:.02em}
+#hSpeed{font-style:italic;font-weight:700}
+#hLevel{line-height:1.55}
+.dm{color:var(--dim);font-weight:500}
+.pd{display:inline-block;width:.7em;height:.7em;border-radius:50%;background:var(--c,#888);margin-right:.5em;box-shadow:0 0 8px var(--c,#888);vertical-align:.02em}
+#gear,.tb{border-color:rgba(130,175,255,.3)}
+#toast{border-radius:3px;background:rgba(8,13,32,.92);border-color:rgba(95,220,255,.35);letter-spacing:.01em}
+.row,.tog,.pfoot{border-color:rgba(130,175,255,.14)}
+.sw.sel{box-shadow:0 0 0 2px var(--accent)}
+.lvg .btn{padding:8px 0;border-radius:3px}
+.msg{border-radius:3px;background:rgba(255,179,71,.1)}
+#overlay.ttl{background:radial-gradient(1.6px 1.6px at 14% 20%,rgba(255,255,255,.85),transparent),radial-gradient(1.2px 1.2px at 82% 14%,rgba(255,255,255,.7),transparent),radial-gradient(1.4px 1.4px at 66% 36%,rgba(180,210,255,.7),transparent),radial-gradient(1px 1px at 28% 44%,rgba(255,255,255,.6),transparent),radial-gradient(1.5px 1.5px at 90% 62%,rgba(255,255,255,.7),transparent),radial-gradient(1px 1px at 8% 70%,rgba(255,220,180,.6),transparent),radial-gradient(1.3px 1.3px at 52% 8%,rgba(255,255,255,.7),transparent),linear-gradient(180deg,rgba(4,6,22,.84),rgba(4,5,13,.62) 45%,rgba(4,5,13,.93))}
+.start{width:min(620px,100%);text-align:center;padding:8px}
+.ttlwrap{position:relative;display:inline-block;max-width:100%;padding:0 4px}
+.ttlwrap svg{position:absolute;left:50%;top:50%;width:124%;height:auto;transform:translate(-50%,-50%) rotate(-5deg);overflow:visible;pointer-events:none}
+.start h1{position:relative;margin:14px 0 14px;padding:0;font-size:clamp(30px,8.6vw,64px);line-height:1.05;font-weight:700;font-style:italic;letter-spacing:-.01em;white-space:nowrap;background:none;-webkit-background-clip:initial;background-clip:initial;color:#fff;text-shadow:0 2px 28px rgba(95,220,255,.4)}
+.start .tag{color:#d3def7;font-size:14px;margin:30px 0 18px;text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.start .go{width:min(440px,100%);padding:16px;font-size:17px;border-radius:3px;box-shadow:0 10px 34px rgba(255,160,40,.25)}
+.start .row2 .btn{border-radius:3px}
+.route{position:relative;display:flex;justify-content:center;align-items:center;gap:9px;margin:2px auto 22px;width:min(440px,100%)}
+.route::before{content:"";position:absolute;left:6px;right:6px;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(130,175,255,.35),transparent)}
+.pl{position:relative;width:9px;height:9px;border-radius:50%;background:var(--c);opacity:.38;flex:none}
+.pl.done{opacity:.95}
+.pl.cur{opacity:1;transform:scale(1.7);box-shadow:0 0 0 3px rgba(255,255,255,.14),0 0 16px var(--c)}
+.start .stat{margin-top:20px;color:#d3def7;font-size:13px;text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.lnk2{color:#aab8dc}
+@media (prefers-reduced-motion:reduce){.ttlwrap svg animateMotion{display:none}}
 </style>
 </head>
 <body>
@@ -143,7 +199,7 @@ body.is-title #hud,body.is-title #gear,body.is-title #touch{display:none!importa
   <button class="tb" id="tJump" data-k="jump">Sprung</button>
   <button class="tb" id="tNitro" data-k="nitro">Nitro</button>
   <button class="tb" id="tHand" data-k="hand">Drift</button>
-  <button class="tb" id="tReset" data-a="reset" aria-label="Zur Werkstatt">🔧</button>
+  <button class="tb" id="tReset" data-a="reset" aria-label="Zum Hangar">🔧</button>
   <button class="tb" id="tSet" data-a="settings" aria-label="Einstellungen">⚙</button>
 </div>
 <div id="flash"></div>
@@ -163,7 +219,7 @@ body.is-title #hud,body.is-title #gear,body.is-title #touch{display:none!importa
    ===================================================================== */
 
 /* ---------- Utils ---------- */
-const COIN_TARGET = 55480, PRICE_BASIS = 85350; // Münzwert aller Level (fest, unabhängig von der Hindernisdichte) und Preisbasis
+let COIN_TARGET = 55480, PRICE_BASIS = 85350; // Münzwert aller Level (fest, unabhängig von der Hindernisdichte) und Preisbasis
 const LEN = 300, NLEV = 280, G = 30, PITU = 12, PITY = -5.5, UW = 40, CELL = 2, TAU = Math.PI * 2, TMAX = 18;
 const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -175,68 +231,68 @@ const cap = t => t[0] + t.slice(1).toLowerCase();
 const wlabel = w => w.label || cap(w.name);
 const angDiff = (a, b) => { let d = (a - b) % TAU; if (d > Math.PI) d -= TAU; if (d < -Math.PI) d += TAU; return d; };
 
-/* ---------- Welten (14 × 20 Level; die Mond-Zielinsel liegt am Ende der Weltraum-Welt) ---------- */
-const WB = { mult: 1, side: 0.16, G: 30, grip: 1, acc: 1, vmax: 1, brk: 1, fw: {}, mud: 0, belt: 0, pad: 0, boostX: 0, isSky: false, thick: 3.5, glow: false, mudC: 0x5a4028, dust: 0xc9b98a, fx: null, ui: '#888' };
+/* ---------- Welten (14 × 20 Level: Erde = 5 Boden + 15 Wolken, danach Mond bis Rand des Universums; Schwerkraft je Welt) ---------- */
+const WB = { mult: 1, side: 0.16, G: 30, grip: 1, acc: 1, vmax: 1, brk: 1, fw: {}, mud: 0, belt: 0, pad: 0, boostX: 0, isSky: false, thick: 3.5, glow: false, mudC: 0x5a4028, dust: 0xc9b98a, fx: null, ui: '#888',
+  rail: [0xffffff, 0x888888], off: [0x666666, 0x606060, 0x6c6c6c], bridge: [0x777777, 0x707070], ledge: [0x888888, 0x808080], pit: [0x000000, 0x000000], oc: [0x888888, 0x777777], cloud: 0xffffff, rampC: [0xffd23f, 0x2b2b2b], tm: null };
 const mkW = o => Object.assign({}, WB, o);
+const SP = { isSky: true, side: 0, thick: 4.5 }; // gemeinsame Werte aller Wolken-Block-Welten im All
 const WORLDS = [
-  mkW({ name: 'OVERWORLD', ui: '#5fae3b', side: 0.16, sky: 0x8fd3ff, fog: 0x8fd3ff, fogN: 70, fogF: 250, sun: 0xfff0d0, sunI: 1.0, hemiS: 0xcfeaff, hemiG: 0x5b7c3a, hemiI: 0.85,
+  mkW({ name: 'ERDE', label: 'Erde', ui: '#5fae3b', side: 0.16, sky: 0x8fd3ff, fog: 0x8fd3ff, fogN: 70, fogF: 250, sun: 0xfff0d0, sunI: 1.0, hemiS: 0xcfeaff, hemiG: 0x5b7c3a, hemiI: 0.85,
     road: [0xb59b6a, 0xab9160], off: [0x5fae3b, 0x59a437, 0x66b641], rail: [0xf4f4f4, 0xd94a3a], rampC: [0xffc933, 0x2b2b2b], bridge: [0x8f5f30, 0x7f5228], ledge: [0xe2d3a8, 0xd6c69a], cliff: 0x7a5533, pitWall: 0x5a4a3a,
     pit: [0x2a6fc7, 0x3380dd], hallFloor: [0x777d88, 0x6c727d], hall: 0xc8433a, hallDark: 0x8e2b25, cloud: 0xffffff, oc: [0xb9803f, 0x8a5a2b], fall: 'Ins Wasser gefallen', flash: 'rgba(40,120,255,.5)',
     far: { c: [0x4a9a35, 0x3f8a2e, 0x378026, 0x2f6f22], b: 26, r: 26, h: 6, n: 4, s: 0.68 } }),
-  mkW({ name: 'WÜSTE', ui: '#e6b45a', side: 0.55, dust: 0xe6c580, sky: 0xf4bd7a, fog: 0xf0b070, fogN: 60, fogF: 230, sun: 0xffdca8, sunI: 1.15, hemiS: 0xffe6bd, hemiG: 0xb07a44, hemiI: 0.8,
-    road: [0xd9b26e, 0xcfa662], off: [0xe6c580, 0xdcb974, 0xebcd8c], rail: [0xb96a2a, 0xf0d9a0], rampC: [0xff8c1a, 0x352010], bridge: [0x9a6a3a, 0x8a5c30], ledge: [0xefd9a5, 0xe3cc97], cliff: 0x8f5a2e, pitWall: 0x6a3a1c,
-    pit: [0x2b1a10, 0x3a2412], hallFloor: [0x9a8a70, 0x8f7f66], hall: 0xd9a441, hallDark: 0x9a6a1f, cloud: 0xfff1dc, oc: [0xb5754a, 0x8a4f2e], fall: 'In den Abgrund gefallen', flash: 'rgba(60,40,20,.6)',
-    far: { c: [0xdcb46a, 0xd0a55c, 0xc4964f], b: 30, r: 30, h: 5, n: 4, s: 0.7 } }),
-  mkW({ name: 'DSCHUNGEL', ui: '#2f9a45', side: 0.35, mud: 0.5, fw: { bump: 2, narrow: 1.5 }, dust: 0x8a6a3a, sky: 0x7fd0a8, fog: 0x5fae86, fogN: 45, fogF: 200, sun: 0xfff2c0, sunI: 0.95, hemiS: 0xbfe8c0, hemiG: 0x1f4a1f, hemiI: 0.8,
-    road: [0x8b6a45, 0x7f5e3c], off: [0x2f7d32, 0x286f2b, 0x36873a], rail: [0x6b4a2a, 0x3d5a2a], rampC: [0xffd23f, 0x2b3a1b], bridge: [0x6b4a2a, 0x5e3f22], ledge: [0xa88c5a, 0x9a7f50], cliff: 0x4a3a22, pitWall: 0x2f2a1a,
-    pit: [0x3a5a2a, 0x2f4a22], hallFloor: [0x6e6a58, 0x646050], hall: 0x3d8f3a, hallDark: 0x1f4d21, cloud: 0xe8f5e0, oc: [0x6b4a2a, 0x4d341c], mudC: 0x5a3d22, fall: 'In die Schlucht gefallen', flash: 'rgba(30,80,30,.55)',
-    fx: { c: 0xd8ff60, rate: 14, y0: 0, yr: 5, vy: 0.6, life: 3, size: 0.18 }, far: { c: [0x2a7a30, 0x226a28, 0x1c5a22, 0x164a1c], b: 26, r: 24, h: 7, n: 4, s: 0.7 } }),
-  mkW({ name: 'SUMPF', tm: 'geyser', tmc: 0x9acd3a, ui: '#8a9a3a', side: 0.12, mud: 1.0, fw: { bridge: 1.6 }, dust: 0x6b5a3a, sky: 0x8a9a6a, fog: 0x58664a, fogN: 30, fogF: 150, sun: 0xc8d8a0, sunI: 0.7, hemiS: 0x9aab7a, hemiG: 0x2a3320, hemiI: 0.75,
-    road: [0x6b5a3a, 0x5f4f33], off: [0x3a4a2a, 0x33421f, 0x42502e], rail: [0x5a4a30, 0x3a3a24], rampC: [0xc8b040, 0x2a2a18], bridge: [0x5a4a30, 0x4d3f28], ledge: [0x7a6a44, 0x6d5e3c], cliff: 0x3a3020, pitWall: 0x2a2416,
-    pit: [0x4a4a1c, 0x3f3f18], hallFloor: [0x5a5a48, 0x50503f], hall: 0x6b7a3a, hallDark: 0x3a4420, cloud: 0x8a9a70, oc: [0x5a4a30, 0x3f3320], mudC: 0x3d2f1c, fall: 'In den Sumpf gesunken', flash: 'rgba(70,80,30,.55)',
-    fx: { c: 0xd8ff60, rate: 12, y0: 0, yr: 3, vy: 0.3, life: 3, size: 0.2 }, far: { c: [0x4a5a34, 0x3f4e2c, 0x364424], b: 24, r: 20, h: 5, n: 3, s: 0.7 } }),
-  mkW({ name: 'WASSERWELT', tm: 'geyser', tmc: 0xbfe8ff, ui: '#2a8fc8', side: 0.3, G: 20, vmax: 0.92, acc: 0.95, dust: 0xe8d8a0, sky: 0x0e5f8f, fog: 0x0a4f7a, fogN: 20, fogF: 130, sun: 0x9fe0ff, sunI: 0.85, hemiS: 0x6fd0ff, hemiG: 0x083a55, hemiI: 0.85,
-    road: [0xc8b68a, 0xbfa97c], off: [0xd8c79a, 0xcfba8a, 0xe0d0a4], rail: [0xff8a5c, 0xffe0b0], rampC: [0xffd23f, 0x0a3a55], bridge: [0x8fd0c0, 0x7fc0b0], ledge: [0xe8d8b0, 0xdccb9f], cliff: 0x8a7a55, pitWall: 0x0a3550,
-    pit: [0x04263a, 0x06304a], hallFloor: [0x7a9aa8, 0x6e8e9c], hall: 0x1fa0c8, hallDark: 0x0f6a88, cloud: 0x9fe8ff, oc: [0xff7a6a, 0xd85a4a], fall: 'In die Tiefe gesunken', flash: 'rgba(0,40,90,.6)',
-    fx: { c: 0xbfefff, rate: 30, y0: -1, yr: 6, vy: 2.5, life: 3, size: 0.25 }, far: { c: [0x1f6a9a, 0x18587f, 0x134868], b: 28, r: 24, h: 6, n: 4, s: 0.7 } }),
-  mkW({ name: 'EISWELT', ui: '#8fd0ff', side: 0.3, grip: 0.28, brk: 0.6, dust: 0xffffff, sky: 0xbfe6ff, fog: 0xd8efff, fogN: 60, fogF: 240, sun: 0xffffff, sunI: 1.1, hemiS: 0xe8f6ff, hemiG: 0x9fb8d8, hemiI: 0.95,
-    road: [0xcfe8f8, 0xc2e0f4], off: [0xf4faff, 0xe6f2fb, 0xffffff], rail: [0xffffff, 0x6fb8e8], rampC: [0xff8a3a, 0x1f3a5a], bridge: [0x9fd0e8, 0x8fc4de], ledge: [0xe8f6ff, 0xdaeefa], cliff: 0x9fc0d8, pitWall: 0x7aa0c0,
-    pit: [0x1a5a8a, 0x2470a8], hallFloor: [0xa8c0d0, 0x9cb4c4], hall: 0x4aa8e0, hallDark: 0x2a6a9a, cloud: 0xffffff, oc: [0x9fd8f0, 0x74b8dc], fall: 'Ins Eiswasser gefallen', flash: 'rgba(150,210,255,.55)',
-    fx: { c: 0xffffff, rate: 26, y0: 8, yr: 4, vy: -2.5, life: 3.5, size: 0.2 }, far: { c: [0xe8f4ff, 0xcfe6f8, 0xb8d8f0, 0xa0c8e8], b: 26, r: 26, h: 6, n: 4, s: 0.66 } }),
-  mkW({ name: 'STEINWELT', ui: '#9a968f', side: 0.6, fw: { ledge: 2, stairs: 2.5, bump: 1.5, gap: 1.2 }, dust: 0xaaa6a0, sky: 0xa8a49e, fog: 0x9a9590, fogN: 55, fogF: 220, sun: 0xffffff, sunI: 0.95, hemiS: 0xd0ccc6, hemiG: 0x5a5650, hemiI: 0.85,
-    road: [0x8a8680, 0x807c76], off: [0x6a6660, 0x625e58, 0x726e68], rail: [0xb8b4ac, 0x5a5650], rampC: [0xffb020, 0x2a2622], bridge: [0x6a5a4a, 0x5e5040], ledge: [0xa8a49c, 0x9c9890], cliff: 0x4a463f, pitWall: 0x35322c,
-    pit: [0x1a1816, 0x24211e], hallFloor: [0x8a8680, 0x7e7a74], hall: 0x7a7670, hallDark: 0x4a463f, cloud: 0xd0ccc6, oc: [0x7a766e, 0x5e5a54], fall: 'In die Schlucht gestürzt', flash: 'rgba(50,50,50,.6)',
-    far: { c: [0x8a8680, 0x7a766f, 0x6a665f, 0x5a564f], b: 30, r: 30, h: 6, n: 4, s: 0.72 } }),
-  mkW({ name: 'FABRIK', tm: 'press', ui: '#e0a020', side: 0.5, belt: 0.7, fw: { mover: 2.5 }, dust: 0x8a8f98, sky: 0x5a6068, fog: 0x4a5058, fogN: 40, fogF: 190, sun: 0xffe0b0, sunI: 0.8, hemiS: 0xb0b8c4, hemiG: 0x2a2e36, hemiI: 0.8,
-    road: [0x5a5f68, 0x50555e], off: [0x3a3e46, 0x33373f, 0x42464e], rail: [0xffc020, 0x2a2a2a], rampC: [0xffc020, 0x1a1a1a], bridge: [0x6a6f78, 0x5e636c], ledge: [0x7a808a, 0x6e747e], cliff: 0x2a2d33, pitWall: 0x1e2126,
-    pit: [0x14110e, 0x1e1a15], hallFloor: [0x6a6f78, 0x5e636c], hall: 0xe0a020, hallDark: 0x7a5a10, cloud: 0x8a9098, oc: [0xd0a030, 0x8a6a1a], fall: 'In die Schmelze gefallen', flash: 'rgba(255,150,40,.5)',
-    fx: { c: 0xffb040, rate: 18, y0: -1, yr: 3, vy: 3, life: 1.2, size: 0.15 }, far: { c: [0x3a3e46, 0x2e3238, 0x24282e], b: 28, r: 26, h: 8, n: 4, s: 0.72 } }),
-  mkW({ name: 'NEON-CITY', label: 'Neon-City', tm: 'laser', ui: '#e02ad0', side: 0.5, boostX: 1.0, pad: 0.5, glow: true, dust: 0x6a4aff, sky: 0x0a0620, fog: 0x120a30, fogN: 40, fogF: 200, sun: 0xff5ad8, sunI: 0.5, hemiS: 0x6a3aff, hemiG: 0x100828, hemiI: 0.9,
-    road: [0x1a1830, 0x15132a], off: [0x0d0b1e, 0x110e26, 0x0a0818], rail: [0xff2ad0, 0x2af0ff], rampC: [0xff2ad0, 0x2af0ff], bridge: [0x2a2650, 0x221e44], ledge: [0x2a2860, 0x231f52], cliff: 0x0d0b1e, pitWall: 0x0a0818,
-    pit: [0x04020c, 0x0a0618], hallFloor: [0x2a2650, 0x221e44], hall: 0x2af0ff, hallDark: 0x1a5a88, cloud: 0x2a1a5a, oc: [0xff2ad0, 0x2a6aff], fall: 'In die Neon-Tiefe gefallen', flash: 'rgba(255,40,200,.45)',
-    fx: { c: 0x2af0ff, rate: 22, y0: 0, yr: 8, vy: 1.2, life: 2.5, size: 0.16 }, far: { c: [0x1a1440, 0x140f34, 0x0f0b28], b: 28, r: 26, h: 9, n: 4, s: 0.74 } }),
-  mkW({ name: 'HÖLLE', tm: 'fire', ui: '#e0501a', side: 0.4, dust: 0x5a3a3a, sky: 0x220906, fog: 0x2c0b06, fogN: 40, fogF: 190, sun: 0xff6a33, sunI: 0.6, hemiS: 0x7a2a18, hemiG: 0x2a0d08, hemiI: 0.75,
-    road: [0x4a3b40, 0x42343a], off: [0x2b1c1f, 0x331f22, 0x241719], rail: [0x7a2a1a, 0x2a1414], rampC: [0xff9a1a, 0x201010], bridge: [0x5a4646, 0x4d3b3b], ledge: [0x6a575c, 0x5e4c51], cliff: 0x1f1417, pitWall: 0x2a1210,
-    pit: [0xff5a12, 0xffa020], hallFloor: [0x555a66, 0x4b505c], hall: 0x4b5060, hallDark: 0x2b2f3a, cloud: 0x3a1f1c, oc: [0x3a2a2e, 0x2a1c20], fall: 'In die Lava gefallen', flash: 'rgba(255,90,20,.55)',
-    fx: { c: 0xff8a2a, rate: 25, y0: -1, yr: 3, vy: 4.5, life: 2.2, size: 0.22 }, far: { c: [0x1f151a, 0x2a1c22, 0x161014], b: 28, r: 28, h: 8, n: 4, s: 0.68 } }),
-  mkW({ name: 'KUROMI', tm: 'geyser', tmc: 0xff8ad8, tmb: 0x2a1a44, tmi: 0x8a2ad0, ui: '#c05af0', side: 0.35, pad: 0.5, boostX: 0.4, glow: true, dust: 0xc890ff, sky: 0x2a1458, fog: 0x3a1a6a, fogN: 45, fogF: 210, sun: 0xff9ae0, sunI: 0.75, hemiS: 0xc8a0ff, hemiG: 0x3a1a60, hemiI: 0.85,
-    road: [0x3d2b5c, 0x352650], off: [0x2a1746, 0x321c54, 0x241240], rail: [0xff6ac8, 0x1a1028], rampC: [0xff6ac8, 0x1a1028], bridge: [0x6a4a8a, 0x5a3d7a], ledge: [0x7a5a9a, 0x6a4d8a], cliff: 0x1a0f2a, pitWall: 0x140a24,
-    pit: [0x9a2ad8, 0xd05ae8], hallFloor: [0x4a3a66, 0x3f3159], hall: 0xff6ac8, hallDark: 0x3a1a5a, cloud: 0x6a4a9a, oc: [0x8a4ac0, 0xff6ac8], fall: 'In den Zaubertrank gefallen', flash: 'rgba(200,60,230,.5)',
-    fx: { c: 0xffb0ec, rate: 22, y0: 0, yr: 8, vy: 1.4, life: 2.6, size: 0.2 }, far: { c: [0x3a2266, 0x2e1a52, 0x24143f, 0x1a0e2e], b: 28, r: 26, h: 7, n: 4, s: 0.68 } }),
-  mkW({ name: 'POMPOM', tm: 'geyser', tmc: 0xffe070, tmb: 0xc8802a, tmi: 0xfff0d0, ui: '#ffd23a', side: 0.3, mud: 0.5, pad: 0.6, mudC: 0xc8802a, dust: 0xfff0a0, sky: 0xffefaa, fog: 0xfff2c4, fogN: 70, fogF: 260, sun: 0xfff4d0, sunI: 0.8, hemiS: 0xfff0c8, hemiG: 0xe8b850, hemiI: 0.7,
-    road: [0xe6cb86, 0xdcbf78], off: [0xffd84a, 0xffce3a, 0xffe25c], rail: [0xffffff, 0xc8802a], rampC: [0xc8802a, 0xfff0d0], bridge: [0xd9a45a, 0xc8933f], ledge: [0xffeeb4, 0xf5dc94], cliff: 0xc8802a, pitWall: 0xa8642a,
-    pit: [0x8a4a1e, 0xa85a26], hallFloor: [0xd8c48a, 0xccb87c], hall: 0xd98a3a, hallDark: 0x8a5a2a, cloud: 0xffffff, oc: [0xc8802a, 0xfff0d0], fall: 'Ins Karamell gefallen', flash: 'rgba(200,130,40,.5)',
-    fx: { c: 0xffffff, rate: 16, y0: 6, yr: 4, vy: -1.2, life: 4, size: 0.24 }, far: { c: [0xffdc62, 0xf5cc48, 0xe8b838, 0xd8a628], b: 26, r: 26, h: 6, n: 4, s: 0.68 } }),
-  mkW({ name: 'HIMMEL', ui: '#4cc2ff', side: 0, isSky: true, thick: 3.5, dust: 0xffffff, sky: 0x86c8ff, fog: 0xbfe3ff, fogN: 80, fogF: 300, sun: 0xffffff, sunI: 1.2, hemiS: 0xeaf6ff, hemiG: 0xb4c8ff, hemiI: 0.95,
+  mkW(Object.assign({ name: 'MOND', label: 'Mond', ui: '#c9ccd6', G: 15, dust: 0xc8c8d0, sky: 0x000208, fog: 0x04050c, fogN: 160, fogF: 480, sun: 0xffffff, sunI: 1.25, hemiS: 0x6a7aa0, hemiG: 0x20222c, hemiI: 0.55, tm: 'geyser', tmc: 0xdfe6ff, tmb: 0x5a5f6a, tmi: 0x8a96b0,
+    road: [0xb4b4bc, 0xa8a8b0], cliff: 0x7a7a84, pitWall: 0x5a5a64, rampC: [0xe8e8f0, 0x3a3a44], hallFloor: [0x9a9aa6, 0x8e8e9a], hall: 0xc8ccd8, hallDark: 0x5a6070, fall: 'In die Leere gefallen', flash: 'rgba(10,10,30,.6)',
+    fx: { c: 0xffffff, rate: 10, y0: 0, yr: 6, vy: 0.3, life: 3, size: 0.12 } }, SP)),
+  mkW(Object.assign({ name: 'MARS', label: 'Mars', ui: '#e0643a', G: 19.5, mud: 0.6, mudC: 0x7a3a1e, dust: 0xe0905a, sky: 0x2a1008, fog: 0x4a1e12, fogN: 60, fogF: 300, sun: 0xffc89a, sunI: 1.0, hemiS: 0xe89a70, hemiG: 0x4a2010, hemiI: 0.8, tm: 'geyser', tmc: 0xffa060, tmb: 0x4a2010, tmi: 0xff6a30,
+    road: [0xc4582f, 0xb85028], cliff: 0x8a3a1e, pitWall: 0x5e2612, rampC: [0xffd23f, 0x3a1a0e], hallFloor: [0xa8603c, 0x9c5636], hall: 0xe0703a, hallDark: 0x7a2e14, fall: 'In den Marsstaub gefallen', flash: 'rgba(120,40,10,.55)',
+    fx: { c: 0xe8a070, rate: 28, y0: -2, yr: 6, vy: 0.5, life: 3, size: 0.2 } }, SP)),
+  mkW(Object.assign({ name: 'ASTEROIDEN', label: 'Asteroidengürtel', ui: '#b09a84', G: 12, belt: 0.6, dust: 0xa09080, sky: 0x050408, fog: 0x0a0810, fogN: 140, fogF: 480, sun: 0xfff0d8, sunI: 1.1, hemiS: 0x8a8090, hemiG: 0x1a1618, hemiI: 0.6, tm: 'press',
+    road: [0x8a7e74, 0x7e7268], cliff: 0x5a5048, pitWall: 0x40382f, rampC: [0xffb020, 0x2a2420], hallFloor: [0x7a7068, 0x6e645c], hall: 0xa0a4ac, hallDark: 0x4a4e58, fall: 'Zwischen die Felsen gestürzt', flash: 'rgba(30,20,10,.6)',
+    fx: { c: 0xb0a090, rate: 14, y0: -10, yr: 20, vy: 0.2, life: 3, size: 0.15 } }, SP)),
+  mkW(Object.assign({ name: 'JUPITER', label: 'Jupiter', ui: '#e8a060', G: 48, vmax: 0.97, acc: 0.92, dust: 0xe0b080, sky: 0x2a1a10, fog: 0x5a3a22, fogN: 120, fogF: 440, sun: 0xffe0b0, sunI: 1.0, hemiS: 0xe8b888, hemiG: 0x5a3418, hemiI: 0.85, tm: 'fire',
+    road: [0xd8a878, 0xcc9a6a], cliff: 0xa8683a, pitWall: 0x7a4a28, rampC: [0xffee60, 0x4a2a14], hallFloor: [0xc8a070, 0xbc9466], hall: 0xe8863a, hallDark: 0x8a4818, fall: 'In den Gassturm gefallen', flash: 'rgba(160,80,20,.55)',
+    fx: { c: 0xffd8a0, rate: 30, y0: -4, yr: 12, vy: 0.8, life: 2.5, size: 0.2 } }, SP)),
+  mkW(Object.assign({ name: 'SATURN', label: 'Saturn', ui: '#e8d28a', G: 34.5, grip: 0.8, dust: 0xf0e4b8, sky: 0x1a1626, fog: 0x3a3448, fogN: 140, fogF: 460, sun: 0xfff4d8, sunI: 1.0, hemiS: 0xe8dcb8, hemiG: 0x3a3040, hemiI: 0.85, tm: 'geyser', tmc: 0xc0f0ff, tmb: 0x6a7a8a, tmi: 0xe0f8ff,
+    road: [0xe8d8a8, 0xdccb98], cliff: 0xb8a070, pitWall: 0x7a6a48, rampC: [0xffd23f, 0x3a3020], hallFloor: [0xd8c898, 0xccbc8c], hall: 0xe8c878, hallDark: 0x8a7438, fall: 'Durch die Ringe gefallen', flash: 'rgba(120,100,40,.5)',
+    fx: { c: 0xffffff, rate: 26, y0: -6, yr: 14, vy: 0.2, life: 3.5, size: 0.14 } }, SP)),
+  mkW(Object.assign({ name: 'URANUS', label: 'Uranus', ui: '#4fd8e0', G: 28.5, grip: 0.8, dust: 0xc8ffff, sky: 0x061a22, fog: 0x0e3a48, fogN: 140, fogF: 460, sun: 0xd8ffff, sunI: 1.0, hemiS: 0x8ad8e8, hemiG: 0x10303a, hemiI: 0.85, tm: 'laser',
+    road: [0x8adfe0, 0x7cd2d6], cliff: 0x4aa8b0, pitWall: 0x2c7a86, rampC: [0xffe14a, 0x0e3a48], hallFloor: [0x7ac8cc, 0x6ebcc0], hall: 0x3ac8d8, hallDark: 0x187a8a, fall: 'In das Methaneis gefallen', flash: 'rgba(20,100,120,.55)',
+    fx: { c: 0xc8ffff, rate: 22, y0: -4, yr: 12, vy: 0.6, life: 3, size: 0.14 } }, SP)),
+  mkW(Object.assign({ name: 'NEPTUN', label: 'Neptun', ui: '#4a84ff', G: 39, dust: 0x8ab0ff, sky: 0x040a30, fog: 0x0a1a6a, fogN: 120, fogF: 440, sun: 0xa8c8ff, sunI: 0.9, hemiS: 0x5a88ff, hemiG: 0x0a1450, hemiI: 0.85, tm: 'geyser', tmc: 0x6ac0ff, tmb: 0x10205a, tmi: 0xc0e0ff,
+    road: [0x3a68d8, 0x305cc8], cliff: 0x1f3a96, pitWall: 0x142872, rampC: [0x6af0ff, 0x0a1450], hallFloor: [0x4a78d8, 0x406ccc], hall: 0x3a7aff, hallDark: 0x1a3a9a, fall: 'In den Sturm gefallen', flash: 'rgba(10,30,140,.6)',
+    fx: { c: 0x8ab8ff, rate: 34, y0: -4, yr: 12, vy: -1.5, life: 2, size: 0.16 } }, SP)),
+  mkW(Object.assign({ name: 'PLUTO', label: 'Pluto & Kuipergürtel', ui: '#d8b8b0', G: 13.5, grip: 0.55, brk: 0.75, dust: 0xeee8e4, sky: 0x070a12, fog: 0x141a2a, fogN: 160, fogF: 480, sun: 0xe8f0ff, sunI: 0.8, hemiS: 0x8a98b8, hemiG: 0x1e2230, hemiI: 0.65, tm: 'press',
+    road: [0xd8d0cc, 0xcac2be], cliff: 0x9a8a88, pitWall: 0x6a5c5c, rampC: [0xff9a5a, 0x2a2230], hallFloor: [0xc8c0bc, 0xbcb4b0], hall: 0xd8a8a0, hallDark: 0x7a5a5a, fall: 'In die Eiswüste gefallen', flash: 'rgba(40,40,60,.6)',
+    fx: { c: 0xffffff, rate: 16, y0: -4, yr: 12, vy: -0.2, life: 4, size: 0.12 } }, SP)),
+  mkW(Object.assign({ name: 'OORT-WOLKE', label: 'Oortsche Wolke', ui: '#8ab4ff', G: 12, dust: 0xc8d8ff, sky: 0x03040c, fog: 0x080a1c, fogN: 160, fogF: 480, sun: 0xc8d8ff, sunI: 0.7, hemiS: 0x6a7ab8, hemiG: 0x10142a, hemiI: 0.6, tm: 'laser',
+    road: [0x9ab0d0, 0x8ca4c6], cliff: 0x5a7098, pitWall: 0x3a4c70, rampC: [0x8affd8, 0x10182c], hallFloor: [0x8aa0c4, 0x7e94b8], hall: 0x6a90e0, hallDark: 0x2a4a90, fall: 'In die Dunkelheit gefallen', flash: 'rgba(10,20,60,.6)',
+    fx: { c: 0xdfeaff, rate: 30, y0: -10, yr: 30, vy: 0.1, life: 4, size: 0.1 } }, SP)),
+  mkW(Object.assign({ name: 'FREMDER STERN', label: 'Fremder Stern', ui: '#ff7a3a', G: 45, vmax: 0.95, dust: 0xff9a5a, sky: 0x2a0604, fog: 0x4a0e06, fogN: 80, fogF: 360, sun: 0xff8a40, sunI: 1.3, hemiS: 0xff7a3a, hemiG: 0x3a0a04, hemiI: 0.9, tm: 'fire',
+    road: [0x7a4a3c, 0x6e4034], cliff: 0x2a1410, pitWall: 0x1a0a08, rampC: [0xffd23f, 0x2a1008], hallFloor: [0x5a3430, 0x4e2c28], hall: 0xff6a2a, hallDark: 0x8a2a10, fall: 'In die Sonnenglut gefallen', flash: 'rgba(255,90,20,.6)',
+    fx: { c: 0xffa040, rate: 34, y0: -6, yr: 14, vy: 2.5, life: 2.4, size: 0.2 } }, SP)),
+  mkW(Object.assign({ name: 'MILCHSTRASSE', label: 'Milchstraße', ui: '#a08aff', G: 25.5, dust: 0xd8c8ff, sky: 0x07031a, fog: 0x120a30, fogN: 160, fogF: 480, sun: 0xffe8ff, sunI: 0.9, hemiS: 0xb0a0ff, hemiG: 0x1a1040, hemiI: 0.8, tm: 'press',
+    road: [0x5a4a9a, 0x504190], cliff: 0x35286a, pitWall: 0x241a4c, rampC: [0x40f0ff, 0x1a1040], hallFloor: [0x6a58b0, 0x5e4ca4], hall: 0xa07aff, hallDark: 0x4a2a9a, fall: 'Zwischen die Sterne gefallen', flash: 'rgba(60,20,120,.55)',
+    fx: { c: 0xffe8ff, rate: 40, y0: -8, yr: 16, vy: 0.3, life: 3, size: 0.12 } }, SP)),
+  mkW(Object.assign({ name: 'ANDROMEDA', label: 'Andromeda', ui: '#4ad0ff', G: 21, dust: 0xa8e8ff, sky: 0x080420, fog: 0x140a3c, fogN: 160, fogF: 480, sun: 0xc8e0ff, sunI: 0.9, hemiS: 0x7ab0ff, hemiG: 0x1a1050, hemiI: 0.8, tm: 'laser',
+    road: [0x2a8ab0, 0x2680a6], cliff: 0x185878, pitWall: 0x103e58, rampC: [0xff6ad8, 0x0c1c3a], hallFloor: [0x3a98c0, 0x3290b6], hall: 0x4ad0ff, hallDark: 0x1a6a90, fall: 'In die Galaxie gefallen', flash: 'rgba(10,60,120,.55)',
+    fx: { c: 0x9ad8ff, rate: 36, y0: -8, yr: 16, vy: 0.3, life: 3, size: 0.12 } }, SP)),
+  mkW(Object.assign({ name: 'RAND DES ALLS', label: 'Rand des Universums', ui: '#f0e8ff', G: 16.5, dust: 0xffffff, sky: 0x000000, fog: 0x060610, fogN: 180, fogF: 500, sun: 0xffffff, sunI: 1.0, hemiS: 0xf0e0ff, hemiG: 0x100820, hemiI: 0.9, tm: 'geyser', tmc: 0xff5ad8, tmb: 0x1a1030, tmi: 0xffffff,
+    road: [0xe8e0f8, 0xdcd2f0], cliff: 0xb0a0d0, pitWall: 0x7a6aa0, rampC: [0xff5ad8, 0x2a1050], hallFloor: [0xf0e8ff, 0xe4daf6], hall: 0xffffff, hallDark: 0x9a8ac8, fall: 'In die Leere gefallen', flash: 'rgba(255,255,255,.55)',
+    fx: { c: 0xffffff, rate: 24, y0: -10, yr: 30, vy: 0, life: 5, size: 0.1 } }, SP))
+];
+const ERDE_SKY = mkW({ name: 'ERDE', label: 'Erde', ui: '#4cc2ff', side: 0, isSky: true, thick: 3.5, dust: 0xffffff, sky: 0x86c8ff, fog: 0xbfe3ff, fogN: 80, fogF: 300, sun: 0xffffff, sunI: 1.2, hemiS: 0xeaf6ff, hemiG: 0xb4c8ff, hemiI: 0.95,
     road: [0xffffff, 0xeaf0ff], off: [0xffffff, 0xf4f8ff, 0xe8f0ff], rail: [0xffffff, 0xbcd0ff], rampC: [0xffd23f, 0x5a6cff], bridge: [0xdfe8ff, 0xcfdcff], ledge: [0xffffff, 0xe6ecff], cliff: 0xc5d3f5, pitWall: 0xb3c4ee,
     pit: [0x9ab7ff, 0xb0c8ff], hallFloor: [0xe4e9f7, 0xd8dff2], hall: 0x5b7cf0, hallDark: 0x3a4fa8, cloud: 0xffffff, oc: [0x9aa6c8, 0x7683ab], fall: 'Von der Wolke gefallen', flash: 'rgba(255,255,255,.55)',
-    fx: { c: 0xffffff, rate: 20, y0: 0, yr: 6, vy: 0.6, life: 2.5, size: 0.25 } }),
-  mkW({ name: 'WELTRAUM', ui: '#7a6aff', side: 0, isSky: true, thick: 5, G: 15, dust: 0xaaaabb, sky: 0x02010a, fog: 0x05031a, fogN: 100, fogF: 420, sun: 0xffffff, sunI: 0.95, hemiS: 0x8a9aff, hemiG: 0x1a1a3a, hemiI: 0.8,
-    road: [0x8a8a98, 0x7e7e8c], off: [0x6a6a78, 0x60606e, 0x72727f], rail: [0x35e0ff, 0x1a1a3a], rampC: [0x35e0ff, 0x1a1a3a], bridge: [0x6a6a80, 0x5e5e74], ledge: [0x9a9aa8, 0x8e8e9c], cliff: 0x5a5a68, pitWall: 0x4a4a5a,
-    pit: [0x0a0820, 0x0a0820], hallFloor: [0x9a9aa8, 0x8e8e9c], hall: 0x6a7aff, hallDark: 0x3a3f9a, cloud: 0xffffff, oc: [0x8a8a98, 0x60606e], fall: 'In den Weltraum gestürzt', flash: 'rgba(20,20,60,.6)' })
-];
+    fx: { c: 0xffffff, rate: 20, y0: 0, yr: 6, vy: 0.6, life: 2.5, size: 0.25 } });
+const dimC = (c, k) => (Math.round(((c >> 16) & 255) * k) << 16) | (Math.round(((c >> 8) & 255) * k) << 8) | Math.round((c & 255) * k);
+WORLDS.slice(1).forEach(w => { w.road = w.road.map(c => dimC(c, 0.8)); w.sunI *= 0.82; w.hemiI *= 0.9; }); // Weltraum-Beleuchtung: Blöcke nicht überstrahlen
+const TH = lv => (lv.w === 0 && lv.sky) ? ERDE_SKY : WORLDS[lv.w]; // Erde: Boden-Level 1–5, danach Wolken-Level
+const gTxt = G => (G / 30).toFixed(2).replace('.', ',') + ' g';
 const NW = WORLDS.length;
-WORLDS.forEach((w, i) => { w.mult = i + 1; w.cSky = new THREE.Color(w.sky); w.cFog = new THREE.Color(w.fog); w.cSun = new THREE.Color(w.sun); w.cHS = new THREE.Color(w.hemiS); w.cHG = new THREE.Color(w.hemiG); });
+WORLDS.forEach((w, i) => { w.mult = i + 1; });
+[...WORLDS, ERDE_SKY].forEach(w => { w.cSky = new THREE.Color(w.sky); w.cFog = new THREE.Color(w.fog); w.cSun = new THREE.Color(w.sun); w.cHS = new THREE.Color(w.hemiS); w.cHG = new THREE.Color(w.hemiG); });
+
 // Effektive Stufen: 20 kleine Schritte. Endwert (6.6) = bisheriges Maximum, unverändert.
 const EFF_OLD = [0, 1, 2, 3, 4, 5, 5.7, 6.2, 6.6];
 const EFF = Array.from({ length: TMAX + 1 }, (_, t) => { const u = t / TMAX; return 6.6 * u * (1.35 - 0.35 * u); });
@@ -288,9 +344,9 @@ const RIMTYPES = [['Klassik', 0], ['Stern', 60], ['Scheibe', 90], ['Turbo', 150]
 const TYPE_PU = { 4: 1.5, 5: 1.5, 6: 2.5, 7: 3, 8: 4, 9: 5 };
 // Autotypen (rein optisch; Preise in Promille aller Level-Münzen)
 const CARS = [
-  { name: 'Coupé', h: 1.75, pu: 0, wr: 0.46, wx: 0.75, wz: 1.3, ww: 0.5 }, { name: 'Kleinwagen', h: 2.13, pu: 3, wr: 0.42, wx: 0.75, wz: 1.0, ww: 0.45 }, { name: 'Buggy', h: 2.04, pu: 6, wr: 0.55, wx: 0.72, wz: 1.35, ww: 0.5 },
-  { name: 'Pickup', h: 1.9, pu: 10, wr: 0.5, wx: 0.75, wz: 1.5, ww: 0.5 }, { name: 'Muscle Car', h: 1.63, pu: 16, wr: 0.5, wx: 0.72, wz: 1.55, ww: 0.55 }, { name: 'Rallye', h: 2.17, pu: 24, wr: 0.48, wx: 0.75, wz: 1.3, ww: 0.5 },
-  { name: 'Formel', h: 1.32, pu: 36, wr: 0.5, wx: 0.73, wz: 1.4, ww: 0.55 }, { name: 'Monstertruck', h: 3.5, pu: 55, wr: 0.8, wx: 0.73, wz: 1.4, ww: 0.55 }
+  { name: 'Coupé', h: 1.75, pu: 0, wr: 0.46, wx: 0.75, wz: 1.3, ww: 0.5 }, { name: 'Shuttle-Kart', h: 2.13, pu: 3, wr: 0.42, wx: 0.75, wz: 1.0, ww: 0.45 }, { name: 'Mond-Buggy', h: 2.3, pu: 6, wr: 0.55, wx: 0.72, wz: 1.35, ww: 0.5 },
+  { name: 'Mars-Rover', h: 2.4, pu: 10, wr: 0.5, wx: 0.75, wz: 1.5, ww: 0.5 }, { name: 'Raketenschlitten', h: 1.63, pu: 16, wr: 0.5, wx: 0.72, wz: 1.55, ww: 0.55 }, { name: 'Ufo-Gleiter', h: 2.0, pu: 24, wr: 0.48, wx: 0.75, wz: 1.3, ww: 0.5 },
+  { name: 'Formel', h: 1.32, pu: 36, wr: 0.5, wx: 0.73, wz: 1.4, ww: 0.55 }, { name: 'Orbit-Crawler', h: 3.8, pu: 55, wr: 0.8, wx: 0.73, wz: 1.4, ww: 0.55 }
 ];
 CARS.forEach(c => c.price = 0);
 function statsOf(u) {
@@ -318,10 +374,17 @@ const DYS = (() => { const rp = mulberry32(31337), D = [0, 0];
     const dn = 1 + Math.floor(rp() * 2), tot = Math.min(25, sum * 0.6); for (let k = 0; k < dn && D.length < NLEV - 2; k++) D.push(-Math.round(tot / dn * (0.7 + 0.3 * rp()))); }
   D.push(0, 0); return D; })();
 
-// Bewegte Hindernisse je Welt (Maße = Kollisionsbox)
-const MVT = [{ kind: 'barrel', hu: 1.15, hz: 0.85, top: 2.3 }, { kind: 'boulder', c: 0xc9743f, hu: 1.4, hz: 1.4, top: 2.6 }, { kind: 'croc', c: 0x3f8a3a, hu: 2.4, hz: 0.9, top: 1.5 }, { kind: 'croc', c: 0x5a6a2a, hu: 2.4, hz: 0.9, top: 1.5 },
-  { kind: 'boat', hu: 2.0, hz: 1.0, top: 2.2 }, { kind: 'snowball', hu: 1.3, hz: 1.3, top: 2.6 }, { kind: 'boulder', c: 0x6a6660, hu: 1.5, hz: 1.5, top: 2.8 }, { kind: 'forklift', hu: 1.6, hz: 1.3, top: 2.3 },
-  { kind: 'cart', hu: 1.5, hz: 1.2, top: 2.2 }, { kind: 'demon', hu: 1.5, hz: 1.1, top: 2.6 }, { kind: 'bat', hu: 1.6, hz: 0.9, top: 2.4 }, { kind: 'pudding', hu: 1.3, hz: 1.2, top: 2.3 }, { kind: 'cart', hu: 1.5, hz: 1.2, top: 2.2 }, { kind: 'cart', hu: 1.5, hz: 1.2, top: 2.2 }];
+// Bewegte Hindernisse je Welt (Maße = Kollisionsbox). Auf der Erde: Fass am Boden, Heißluftballon in den Wolken.
+const MVT = [{ kind: 'barrel', hu: 1.15, hz: 0.85, top: 2.3 },
+  { kind: 'rover', c: 0xdcdfe8, c2: 0xff8a1f, hu: 1.7, hz: 1.2, top: 2.0 }, { kind: 'drone', c: 0xb84a28, c2: 0xffb070, hu: 1.5, hz: 1.3, top: 2.4 },
+  { kind: 'boulder', c: 0x8a7a6a, hu: 1.6, hz: 1.6, top: 3.0 }, { kind: 'satellite', c: 0xe8c040, c2: 0x1a3a8a, hu: 2.0, hz: 1.3, top: 2.4 },
+  { kind: 'snowball', hu: 1.4, hz: 1.4, top: 2.8 }, { kind: 'ufo', c: 0x6ae8f0, c2: 0x2a8a96, hu: 1.8, hz: 1.5, top: 2.2 },
+  { kind: 'comet', c: 0x4a7aff, c2: 0x9ad0ff, hu: 1.9, hz: 1.2, top: 2.2 }, { kind: 'boulder', c: 0xcbbab0, hu: 1.5, hz: 1.5, top: 2.8 },
+  { kind: 'comet', c: 0xdfeaff, c2: 0x8ab8ff, hu: 2.0, hz: 1.2, top: 2.2 }, { kind: 'alien', c: 0xff5a2a, c2: 0xffc040, hu: 1.5, hz: 1.3, top: 2.6 },
+  { kind: 'ufo', c: 0xc08aff, c2: 0x6a3ac0, hu: 1.9, hz: 1.6, top: 2.2 }, { kind: 'alien', c: 0x3ac8ff, c2: 0xff6ad8, hu: 1.5, hz: 1.3, top: 2.6 },
+  { kind: 'satellite', c: 0xf0e8ff, c2: 0x6a3ac0, hu: 2.0, hz: 1.3, top: 2.4 }];
+const MVT_E0S = { kind: 'balloon', c: 0xe63946, c2: 0xffd23f, hu: 1.6, hz: 1.6, top: 3.2 };
+const mvOf = lv => (lv.w === 0 && lv.sky) ? MVT_E0S : MVT[lv.w];
 const TMK = { press: [null, 1.3, 0.4, 2.2], laser: [null, 1.5, 0.55, 2.6], geyser: [1.5, 4.2, 0.45, 2.4], fire: [1.5, 4.2, 0.45, 2.0] };
 const timedOn = (m, t) => (((t / m.per) + m.ph) % 1) < m.duty;
 
@@ -329,7 +392,7 @@ function genLevel(L) {
   const rnd = mulberry32(90210 + L * 104729);
   const R = (a, b) => a + (b - a) * rnd();
   const RI = (a, b) => Math.floor(R(a, b + 0.999));
-  const w = Math.floor(L / 20), WD = WORLDS[w], sky = WD.isSky, dg = L < 200 ? L / 239 : 200 / 239 + (L - 200) * (1 - 200 / 239) / (NLEV - 201), dl = (L % 20) / 19, d = 0.5 * dg + 0.5 * dl;
+  const w = Math.floor(L / 20), esk = w === 0 && L >= 5, WD = esk ? ERDE_SKY : WORLDS[w], sky = WD.isSky || esk, dg = L < 200 ? L / 239 : 200 / 239 + (L - 200) * (1 - 200 / 239) / (NLEV - 201), dl = (L % 20) / 19, d = 0.5 * dg + 0.5 * dl;
   const lv = { L, w, d, sky, G: WD.G, moon: L === NLEV - 1, z0: L * LEN, gaps: [], ramps: [], ledges: [], bumps: [], narrows: [], obs: [], movers: [], boosts: [], timed: [], coins: [], isl: [], curves: [], climbs: [], mud: [], belts: [], pads: [], wBase: sky ? 10 : 10.6 - 3.2 * d };
   LV[L] = lv;
   const z0 = lv.z0, sn = v => Math.round(v / 2) * 2, hwB = lv.wBase;
@@ -348,7 +411,7 @@ function genLevel(L) {
   const F0 = z0 + 40, F1 = z0 + LEN - 66;
   if (sky) {
     /* --- Himmel / Weltraum: Inseln im Nichts --- */
-    const d2 = dl, endStart = z0 + LEN - 56, maxW = hwB - 1.5, kg = lv.G < 30 ? (30 / lv.G) * 0.85 : 1;
+    const d2 = dl, endStart = z0 + LEN - 56, maxW = hwB - 1.5, kg = lv.G < 30 ? (30 / lv.G) * 0.85 : Math.max(0.5, 30 / lv.G);
     const mg = Math.round(8 * kg / 2) * 2, fin = Math.round(20 * kg / 2) * 2;
     lv.isl.push({ a: z0, b: z0 + 40, uc: 0, hw: UW, dh: 0 }); lv.isl.push({ a: endStart, b: z0 + LEN, uc: 0, hw: UW, dh: 0 });
     let cur = z0 + 40, prevU = 0, prevDh = 0;
@@ -363,8 +426,13 @@ function genLevel(L) {
       arcU(cur - 2, a + 2, prevU, uc, Math.max(prevDh, dh) + 1.5, 2.6, 5, g > 12);
       const ramp = len >= 12 && hwI >= 4 && rnd() < 0.7 - 0.4 * d2;
       if (ramp) { lv.ramps.push({ a: b - 8, b, h: R(1.0, 1.8) }); if (len >= 20) lv.boosts.push({ z: b - 18, u: uc }); }
-      const mid = sn(a + len / 2 - 2);
-      if (len >= 14 && hwI >= 6 && rnd() < 0.6 + 0.3 * d2) { const side = rnd() < 0.5 ? -1 : 1; lv.obs.push({ u: uc + side * (hwI - 1.9), z: mid, hu: 1.5, hz: 1.2, top: 2.4, k: 0 }); }
+      const mid = sn(a + len / 2 - 2), rm = len - (ramp ? 8 : 0), pm = rnd(), L20 = L % 20, MTS = mvOf({ w, sky: true }), tmK = WD.tm ? TMK[WD.tm] : null, feat = rm >= 12 && hwI >= 6, fz = sn(a + rm * 0.55);
+      if (feat && (w >= 1 || L20 >= 8) && pm < 0.22 + 0.30 * d2) lv.movers.push({ z: fz, u0: uc, amp: hwI - MTS.hu - 0.5, sp: R(1.1, 1.5) + 0.9 * d2, ph: R(0, TAU), hu: MTS.hu, hz: MTS.hz, top: MTS.top });
+      else if (feat && tmK && L20 >= 1 && pm < 0.50 + 0.30 * d2) { const full = tmK[0] === null, hu = full ? hwI + 0.4 : tmK[0], u = full ? uc : uc + R(-(hwI - hu - 0.8), hwI - hu - 0.8);
+        lv.timed.push({ kind: WD.tm, u, z: fz, hu, hz: full ? (WD.tm === 'laser' ? 0.3 : 1.0) : hu, top: tmK[1], duty: tmK[2], per: tmK[3] - 0.5 * d2, ph: rnd() }); }
+      else if (feat && WD.mud > 0 && pm < 0.85) lv.mud.push({ a: a + 3, b: b - (ramp ? 10 : 4) });
+      else if (feat && WD.belt > 0 && pm < 0.85) lv.belts.push({ a: a + 3, b: b - (ramp ? 10 : 4), v: (rnd() < 0.5 ? 1 : -1) * R(5, 7) });
+      else if (len >= 14 && hwI >= 6 && rnd() < 0.6 + 0.3 * d2) { const side = rnd() < 0.5 ? -1 : 1; lv.obs.push({ u: uc + side * (hwI - 1.9), z: mid, hu: 1.5, hz: 1.2, top: 2.4, k: [0, 0, 1, 2, 4][RI(0, 4)] }); }
       else if (len >= 12 && hwI >= 4 && rnd() < 0.5) lv.obs.push({ u: uc, z: mid, hu: hwI, hz: 0.7, top: 1.15, k: 3 });
       line(a + 3, b - (ramp ? 10 : 3), uc, 6);
       cur = b; prevU = uc; prevDh = dh;
@@ -447,85 +515,92 @@ const OBR = [
      [[0, .5, 0, 1, 1, 1, 0xe6c04a], [0, .25, 0, 1.02, .08, 1.02, 0xb08a2a], [0, .5, 0, 1.02, .08, 1.02, 0xb08a2a], [0, .75, 0, 1.02, .08, 1.02, 0xb08a2a]],
      [[-1, .5, 0, .03, 1.2, .6, 0x8a5a2a], [1, .5, 0, .03, 1.2, .6, 0x8a5a2a], [0, .75, 0, 1, .22, .5, 0xf4f4f4], [0, .35, 0, 1, .22, .5, 0xd94a3a]],
      [[0, .5, 0, .5, 1, .5, 0x6b4423], [0, 1.05, 0, 1.3, .3, 1.3, 0x2f8f3a], [0, .3, 0, 1.05, .12, 1.05, 0xd94a3a]]],
-    /* 1 Wüste: Sandstein, Kaktus, Steinhaufen, Sandsackwall, hoher Kaktus */
-    [[[0, .5, 0, 1, 1, 1, 0xc9743f], [0, .62, 0, 1.02, .1, 1.02, 0xa85a35], [0, .85, 0, .9, .3, .9, 0xd98a50]],
-     [[0, .5, 0, .5, 1, .6, 0x3f9a3f], [-.85, .65, 0, .6, .16, .35, 0x3f9a3f], [-1, .85, 0, .2, .45, .35, 0x3f9a3f]],
-     [[0, .25, 0, 1, .5, 1, 0xb0623a], [0, .62, 0, .72, .5, .72, 0xc9743f], [0, .95, 0, .4, .3, .4, 0xd98a50]],
-     [[0, .5, 0, 1, 1, .8, 0xd9b26e], [0, .9, 0, 1, .2, .6, 0xc4a05a], [-.5, .5, 0, .02, 1.05, .9, 0x8a6a3a], [.5, .5, 0, .02, 1.05, .9, 0x8a6a3a]],
-     [[0, .5, 0, .4, 1, .4, 0x2f8a35], [-.9, .6, 0, .5, .12, .3, 0x2f8a35], [-1, .8, 0, .15, .4, .3, 0x2f8a35], [.9, .7, 0, .5, .12, .3, 0x2f8a35], [1, .9, 0, .15, .4, .3, 0x2f8a35]]],
-    /* 2 Dschungel: Moosruine, Baumstumpf, Götzenstatue, gefallener Stamm, Ranken-Säule */
-    [[[0, .5, 0, 1, 1, 1, 0x6a7a5a], [0, 1.02, 0, 1, .08, 1, 0x2f8f3a], [.3, .5, 0, .15, .9, 1.02, 0x3f9a3f]],
-     [[0, .5, 0, 1, 1, 1, 0x5a3a1e], [0, 1.02, 0, .85, .05, .85, 0xd8b070], [0, 1.03, 0, .4, .06, .4, 0x9a7040]],
-     [[0, .3, 0, 1, .6, 1, 0x7a7a6a], [0, .8, 0, .75, .5, .8, 0x8a8a78], [0, .85, .55, .5, .15, .1, 0x2a2a20], [-.25, .9, .55, .1, .1, .1, 0xffd23f, 1], [.25, .9, .55, .1, .1, .1, 0xffd23f, 1]],
-     [[0, .4, 0, 1, .8, .9, 0x5a3a1e], [0, .85, 0, 1, .15, .7, 0x2f8f3a], [-1, .4, 0, .03, .85, .95, 0xd8b070], [1, .4, 0, .03, .85, .95, 0xd8b070]],
-     [[0, .5, 0, .6, 1, .6, 0x4a5a3a], [0, .5, 0, .7, .08, .7, 0x2f8f3a], [0, .75, 0, .7, .08, .7, 0x2f8f3a], [0, 1.05, 0, 1.3, .2, 1.3, 0x1f6b25]]],
-    /* 3 Sumpf: morsche Stämme, toter Stumpf, Wurzelhügel, Stammzaun, toter Baum */
-    [[[0, .3, 0, 1, .6, 1, 0x4a3a22], [0, .8, 0, .85, .4, .85, 0x3a2c18], [.2, 1, 0, .4, .1, .5, 0x556b2f]],
-     [[0, .5, 0, 1, 1, 1, 0x2a2218], [0, 1.02, 0, .5, .1, .5, 0x1a1610], [.5, .6, 0, .3, .3, .3, 0x556b2f]],
-     [[0, .3, 0, 1, .6, 1, 0x3a3018], [0, .75, 0, .7, .5, .7, 0x4a4020], [0, 1, 0, .4, .2, .4, 0x6a8a3a]],
-     [[0, .4, 0, 1, .8, .8, 0x4a3a22], [-1, .5, 0, .03, 1.1, .9, 0x2a2218], [1, .5, 0, .03, 1.1, .9, 0x2a2218], [0, .9, 0, .9, .15, .5, 0x556b2f]],
-     [[0, .5, 0, .4, 1, .4, 0x2a2218], [.6, .7, 0, .9, .1, .2, 0x2a2218], [-.6, .85, 0, .8, .1, .2, 0x2a2218], [0, 1.05, 0, .9, .1, .9, 0x556b2f]]],
-    /* 4 Wasserwelt: Schwimmkiste, Boje, Koralle, Netzsperre, Mast */
-    [[[0, .5, 0, 1, 1, 1, 0xd0d8e0], [0, .5, 0, 1.03, .14, 1.03, 0x3a86ff], [0, .5, 0, .14, 1.02, 1.03, 0x3a86ff]],
-     [[0, .35, 0, 1, .7, 1, 0xff3a3a], [0, .5, 0, 1.03, .2, 1.03, 0xffffff], [0, .9, 0, .5, .3, .5, 0xffe14a, 1]],
-     [[0, .3, 0, 1, .6, 1, 0xff7aa0], [-.3, .75, 0, .4, .5, .5, 0xff5a80], [.3, .7, 0, .35, .6, .4, 0xffa070], [0, .95, 0, .2, .3, .3, 0xffd0e0]],
-     [[0, .7, 0, 1, .18, .4, 0xffffff], [0, .35, 0, 1, .18, .4, 0xff8a1f], [-1, .5, 0, .03, 1.1, .9, 0x8a5a2a], [1, .5, 0, .03, 1.1, .9, 0x8a5a2a]],
-     [[0, .5, 0, .4, 1, .4, 0x8a5a2a], [0, .85, .3, .05, .3, .9, 0xffffff], [0, 1.02, 0, .8, .06, .8, 0xff3a3a]]],
-    /* 5 Eiswelt: Eisblock, Kristall, Schneehaufen, Eiszapfen-Wall, Eisspitze */
-    [[[0, .5, 0, 1, 1, 1, 0x9fd8ff], [0, 1.02, 0, 1, .05, 1, 0xe8f8ff], [.3, .6, 0, .1, .8, 1.02, 0xd0f0ff]],
-     [[0, .25, 0, 1, .5, 1, 0x8fd0ff], [0, .7, 0, .65, .5, .65, 0xb8e6ff], [0, 1, 0, .3, .3, .3, 0xe8f8ff]],
-     [[0, .3, 0, 1, .6, 1, 0xffffff], [0, .75, 0, .7, .4, .7, 0xf0f8ff], [0, 1, 0, .4, .2, .4, 0xd8efff]],
-     [[0, .4, 0, 1, .8, .8, 0xffffff], [-.8, 1, 0, .08, .4, .5, 0xbfe8ff], [-.4, 1, 0, .08, .4, .5, 0xbfe8ff], [0, 1, 0, .08, .4, .5, 0xbfe8ff], [.4, 1, 0, .08, .4, .5, 0xbfe8ff], [.8, 1, 0, .08, .4, .5, 0xbfe8ff]],
-     [[0, .3, 0, .7, .6, .7, 0x8fd0ff], [0, .75, 0, .45, .5, .45, 0xb8e6ff], [0, 1.05, 0, .2, .3, .2, 0xe8f8ff]]],
-    /* 6 Steinwelt: Felsbrocken, Stalagmit, Riesenfels, Steinmauer, Felsnadel */
-    [[[0, .4, 0, 1, .8, 1, 0x6a6660], [.2, .9, 0, .7, .4, .7, 0x7a766f]],
-     [[0, .25, 0, 1, .5, 1, 0x7a766f], [0, .7, 0, .6, .5, .6, 0x8a8680], [0, 1, 0, .25, .3, .25, 0x9a968f]],
-     [[0, .35, 0, 1, .7, 1, 0x5a5650], [.15, .85, 0, .65, .4, .65, 0x6a6660], [-.3, .95, .2, .3, .2, .3, 0x7a766f]],
-     [[0, .5, 0, 1, 1, .9, 0x6a6660], [0, 1.02, 0, 1, .06, .9, 0x8a8680], [-.6, .5, 0, .02, 1.05, 1, 0x4a4640], [.1, .5, 0, .02, 1.05, 1, 0x4a4640], [.6, .5, 0, .02, 1.05, 1, 0x4a4640]],
-     [[0, .3, 0, .8, .6, .8, 0x6a6660], [0, .75, 0, .5, .5, .5, 0x7a766f], [0, 1.05, 0, .25, .3, .25, 0x9a968f]]],
-    /* 7 Fabrik: Warnkiste, Ölfass, Maschine, Schranke, Rohrsäule */
-    [[[0, .5, 0, 1, 1, 1, 0x9aa0aa], [0, .5, 0, 1.03, .2, 1.03, 0xffc933], [0, .8, 0, 1.03, .1, 1.03, 0x2b2b2b], [0, .2, 0, 1.03, .1, 1.03, 0x2b2b2b]],
-     [[0, .5, 0, 1, 1, 1, 0x2a6ac0], [0, .3, 0, 1.05, .08, 1.05, 0x1a3a70], [0, .7, 0, 1.05, .08, 1.05, 0x1a3a70], [0, 1.02, 0, .8, .05, .8, 0x9aa0aa]],
-     [[0, .4, 0, 1, .8, 1, 0x7a808a], [0, .85, 0, 1, .1, 1, 0xd0a030], [0, 1.05, 0, .5, .3, .5, 0x5a5f68], [.4, .55, .51, .15, .15, .05, 0xff3a3a, 1]],
-     [[0, .75, 0, 1, .3, .5, 0xffc933], [0, .45, 0, 1, .3, .5, 0x2b2b2b], [-1, .5, 0, .03, 1.1, .8, 0x5a5f68], [1, .5, 0, .03, 1.1, .8, 0x5a5f68]],
-     [[0, .5, 0, .6, 1, .6, 0x9aa0aa], [0, .3, 0, .75, .1, .75, 0x5a5f68], [0, .75, 0, .75, .1, .75, 0x5a5f68], [0, 1.05, 0, .6, .15, .6, 0xff3a3a, 1]]],
-    /* 8 Neon City: Neon-Barriere, Hologramm-Säule, Leuchtwürfel, Laserzaun (statisch), Neon-Mast */
-    [[[0, .5, 0, 1, 1, 1, 0x1a1830], [0, 1.02, 0, 1, .06, 1, 0xff2ad0, 1], [0, .5, 0, 1.03, .08, 1.03, 0x2af0ff, 1]],
-     [[0, .5, 0, 1, 1, 1, 0x1a1830], [0, .2, 0, 1.03, .06, 1.03, 0x2af0ff, 1], [0, .5, 0, 1.03, .06, 1.03, 0xff2ad0, 1], [0, .8, 0, 1.03, .06, 1.03, 0x2af0ff, 1]],
-     [[0, .5, 0, 1, 1, 1, 0x1a1830], [0, 1.02, 0, .9, .06, .9, 0xffe14a, 1], [0, .5, 0, 1.03, .1, 1.03, 0xff2ad0, 1], [0, .5, 0, .1, 1.02, 1.03, 0x2af0ff, 1]],
-     [[0, .6, 0, 1, .25, .35, 0xff2ad0, 1], [0, .25, 0, 1, .25, .35, 0x2af0ff, 1], [-1, .5, 0, .03, 1.1, .8, 0x2a2650], [1, .5, 0, .03, 1.1, .8, 0x2a2650]],
-     [[0, .5, 0, .4, 1, .4, 0x2a2650], [0, .3, 0, .55, .06, .55, 0x2af0ff, 1], [0, .7, 0, .55, .06, .55, 0xff2ad0, 1], [0, 1.05, 0, 1, .1, 1, 0xffe14a, 1]]],
-    /* 9 Hölle: Obsidian, Knochenspitze, Lavafels, Speerzaun, Dämonen-Totem */
-    [[[0, .5, 0, 1, 1, 1, 0x2c1f24], [0, .5, 0, 1.03, .1, 1.03, 0xff6a10, 1], [.2, .5, 0, .08, 1.02, 1.03, 0xff9a1a, 1]],
-     [[0, .3, 0, 1, .6, 1, 0x392a30], [0, .8, 0, .55, .5, .55, 0x2c1f24], [0, 1.05, 0, .2, .3, .2, 0xff6a10, 1]],
-     [[0, .4, 0, 1, .8, 1, 0x1f151a], [0, .85, 0, .7, .3, .7, 0x392a30], [0, 1, 0, .4, .1, .4, 0xff5a10, 1]],
-     [[0, .35, 0, 1, .7, .6, 0x2c1f24], [-.8, .95, 0, .08, .4, .4, 0xff6a10, 1], [-.4, .95, 0, .08, .4, .4, 0xff6a10, 1], [0, .95, 0, .08, .4, .4, 0xff6a10, 1], [.4, .95, 0, .08, .4, .4, 0xff6a10, 1], [.8, .95, 0, .08, .4, .4, 0xff6a10, 1]],
-     [[0, .4, 0, .7, .8, .7, 0x2c1f24], [0, 1, 0, 1, .25, 1, 0x392a30], [-.25, 1, .5, .15, .1, .1, 0xff5a10, 1], [.25, 1, .5, .15, .1, .1, 0xff5a10, 1]]],
-    /* 10 Kuromi: Geschenkbox, Zauberkessel, Sternenblock, Zuckerzaun, Kristall */
-    [[[0, .5, 0, 1, 1, 1, 0x6a3a9a], [0, .5, 0, 1.03, .16, 1.03, 0xff6ac8, 1], [0, .5, 0, .16, 1.02, 1.03, 0xff6ac8, 1], [0, 1.12, 0, .5, .2, .5, 0xff6ac8, 1]],
-     [[0, .4, 0, 1, .8, 1, 0x1a1428], [0, .85, 0, 1.06, .14, 1.06, 0x3a2a5a], [0, .95, 0, .85, .08, .85, 0xff6ac8, 1], [-.9, .3, 0, .14, .3, .4, 0x1a1428], [.9, .3, 0, .14, .3, .4, 0x1a1428]],
-     [[0, .5, 0, 1, 1, 1, 0x2a1a44], [0, 1.02, 0, .9, .06, .9, 0xff6ac8, 1], [0, .5, 0, 1.03, .1, 1.03, 0xffe14a, 1], [0, 1.12, 0, .16, .2, .5, 0xffe14a, 1], [0, 1.12, 0, .5, .2, .16, 0xffe14a, 1]],
-     [[0, .7, 0, 1, .25, .4, 0xff6ac8, 1], [0, .35, 0, 1, .25, .4, 0x8a4ac0], [-1, .5, 0, .03, 1.1, .8, 0x2a1a44], [1, .5, 0, .03, 1.1, .8, 0x2a1a44]],
-     [[0, .3, 0, .7, .6, .7, 0x6a3a9a], [0, .75, 0, .45, .5, .45, 0xb05ae8], [0, 1.05, 0, .2, .3, .2, 0xff8ad8, 1]]],
-    /* 11 Pompom: Pudding-Becher, Cupcake, Torte, Waffelzaun, Eistüte */
-    [[[0, .4, 0, .9, .8, .9, 0xfff0a0], [0, .85, 0, 1, .14, 1, 0xc8802a], [0, 1.05, 0, .3, .3, .3, 0xff3a4a]],
-     [[0, .3, 0, .9, .6, .9, 0xd9a45a], [0, .3, 0, .95, .08, .95, 0xb8802f], [0, .75, 0, 1, .35, 1, 0xffffff], [0, .98, 0, .6, .2, .6, 0xff9ac8], [0, 1.12, 0, .16, .16, .16, 0xff3a4a]],
-     [[0, .25, 0, 1, .5, 1, 0xf5d890], [0, .55, 0, 1.03, .1, 1.03, 0xffffff], [0, .75, 0, 1, .35, 1, 0xffb8d8], [0, .98, 0, 1.03, .12, 1.03, 0xffffff], [0, 1.1, 0, .14, .16, .14, 0xff3a4a]],
-     [[0, .75, 0, 1, .25, .4, 0xfff0d0], [0, .4, 0, 1, .25, .4, 0xc8802a], [-1, .5, 0, .03, 1.1, .8, 0xffffff], [1, .5, 0, .03, 1.1, .8, 0xffffff], [-.5, .5, 0, .02, 1.05, .8, 0xff8ac0], [.5, .5, 0, .02, 1.05, .8, 0xff8ac0]],
-     [[0, .25, 0, .6, .5, .6, 0xd9a45a], [0, .7, 0, .85, .4, .85, 0xfff0d0], [0, .98, 0, .6, .3, .6, 0xffb8d8], [0, 1.15, 0, .14, .14, .14, 0xff3a4a]]],
-    /* 12 Himmel: Gewitterwolke, Wolkensäule, Sturmwolke, Regenbogen-Balken */
+    /* 1 Mond: Mondfelsen, Kratertonne, Sondenkapsel, Absperrbalken, Funkmast */
+    [[[0, .4, 0, 1, .8, 1, 0x8a8a94], [.2, .9, 0, .7, .4, .7, 0x9a9aa6], [-.3, .35, .2, .35, .3, .3, 0x6a6a74]],
+     [[0, .5, 0, 1, 1, 1, 0xdde1ea], [0, .5, 0, 1.03, .12, 1.03, 0xff8a1f]],
+     [[0, .35, 0, 1, .7, 1, 0xc8ccd6], [0, .8, 0, .5, .4, .5, 0xe8ecf4], [0, 1.05, 0, .2, .15, .2, 0xff3a3a, 1]],
+     [[0, .7, 0, 1, .25, .5, 0xdde1ea], [0, .35, 0, 1, .25, .5, 0xff8a1f], [-1, .5, 0, .03, 1.1, .8, 0x6a6a74], [1, .5, 0, .03, 1.1, .8, 0x6a6a74]],
+     [[0, .3, 0, .7, .6, .7, 0x8a8a94], [0, .8, 0, .15, .6, .15, 0xdde1ea], [0, 1.05, 0, .9, .1, .9, 0xdde1ea]]],
+    /* 2 Mars: Rotes Gestein, Staubdüne, Marssonde, Dünenwall, Felsnadel */
+    [[[0, .45, 0, 1, .9, 1, 0xb4502c], [0, .95, 0, .8, .2, .8, 0xc8643a], [.3, .4, .3, .3, .4, .3, 0x8a3a1e]],
+     [[0, .25, 0, 1, .5, 1, 0xd4905a], [0, .6, 0, .6, .4, .6, 0xe0a070]],
+     [[0, .3, 0, 1, .6, 1, 0xe0e0e8], [0, .75, 0, .7, .3, .7, 0x2a2a30], [0, 1.0, 0, .12, .4, .12, 0xe0e0e8], [.4, .55, .51, .15, .15, .05, 0x35e0ff, 1]],
+     [[0, .7, 0, 1, .25, .5, 0xd4905a], [0, .35, 0, 1, .25, .5, 0x8a3a1e], [-1, .5, 0, .03, 1.1, .8, 0x5a2812], [1, .5, 0, .03, 1.1, .8, 0x5a2812]],
+     [[0, .3, 0, .8, .6, .8, 0xb4502c], [0, .75, 0, .5, .5, .5, 0xc8643a], [0, 1.05, 0, .25, .3, .25, 0xd88a5a]]],
+    /* 3 Asteroidengürtel: Asteroid, Erzbrocken, Eisklumpen, Trümmerbalken, Bohrturm */
+    [[[0, .4, 0, 1, .8, 1, 0x7a6e64], [.2, .9, 0, .7, .4, .7, 0x8a7e74], [-.3, .5, .55, .3, .3, .2, 0x5a5048]],
+     [[0, .35, 0, 1, .7, 1, 0x5a5048], [0, .5, 0, .4, .3, 1.05, 0xe8c040, 1], [.3, .8, 0, .3, .3, .3, 0xe8c040, 1]],
+     [[0, .3, 0, 1, .6, 1, 0x9ab8d0], [0, .8, 0, .6, .5, .6, 0xc8e4f4]],
+     [[0, .6, 0, 1, .3, .5, 0x9aa0aa], [0, .3, 0, 1, .3, .5, 0xd0a030], [-1, .5, 0, .03, 1.1, .8, 0x5a5f68], [1, .5, 0, .03, 1.1, .8, 0x5a5f68]],
+     [[0, .5, 0, .5, 1, .5, 0x7a808a], [0, 1.05, 0, 1, .12, 1, 0xd0a030], [0, .3, 0, .7, .08, .7, 0x4a4e58]]],
+    /* 4 Jupiter: Gaswirbel-Block, Blitzsäule, Sturmkugel, Wolkenband, Gassäule */
+    [[[0, .5, 0, 1, 1, 1, 0xc8803a], [0, .5, 0, 1.03, .2, 1.03, 0xf0d8a0], [0, .8, 0, 1.03, .14, 1.03, 0xa85a2a]],
+     [[0, .5, 0, .5, 1, .5, 0xe8c880], [0, .5, 0, .2, 1.02, .2, 0xffee80, 1]],
+     [[0, .4, 0, 1, .8, 1, 0xa85a2a], [0, .85, 0, .7, .3, .7, 0xe8a060], [0, 1.05, 0, .3, .2, .3, 0xffee80, 1]],
+     [[0, .7, 0, 1, .25, .5, 0xf0d8a0], [0, .35, 0, 1, .25, .5, 0xc8803a], [-1, .5, 0, .03, 1.1, .8, 0x7a4a28], [1, .5, 0, .03, 1.1, .8, 0x7a4a28]],
+     [[0, .4, 0, .7, .8, .7, 0xd49a5a], [0, .95, 0, .9, .15, .9, 0xf4e8d0]]],
+    /* 5 Saturn: Eisbrocken, Ringfelsen, Eiskristall, Eiswall, Eisspitze */
+    [[[0, .45, 0, 1, .9, 1, 0xc8e8f4], [0, 1.0, 0, .8, .12, .8, 0xffffff], [.3, .6, 0, .1, .8, 1.02, 0xe8f8ff]],
+     [[0, .3, 0, 1, .6, 1, 0xa89870], [0, .75, 0, .7, .4, .7, 0xc8b88a]],
+     [[0, .3, 0, .7, .6, .7, 0x9ad8f0], [0, .75, 0, .45, .5, .45, 0xc8f0ff], [0, 1.05, 0, .2, .3, .2, 0xffffff]],
+     [[0, .4, 0, 1, .8, .8, 0xe8f6ff], [-.8, 1, 0, .08, .4, .5, 0xbfe8ff], [-.4, 1, 0, .08, .4, .5, 0xbfe8ff], [0, 1, 0, .08, .4, .5, 0xbfe8ff], [.4, 1, 0, .08, .4, .5, 0xbfe8ff], [.8, 1, 0, .08, .4, .5, 0xbfe8ff]],
+     [[0, .3, 0, .7, .6, .7, 0xc8e8f4], [0, .75, 0, .45, .5, .45, 0xe8f8ff], [0, 1.05, 0, .2, .3, .2, 0xffffff]]],
+    /* 6 Uranus: Methaneis, Kristallsäule, Eiswürfel, Strahlbalken, Eisnadel */
+    [[[0, .5, 0, 1, 1, 1, 0x7adce6], [0, 1.02, 0, .9, .1, .9, 0xc8ffff], [0, .5, 0, 1.03, .1, 1.03, 0x2a8a96]],
+     [[0, .5, 0, .5, 1, .5, 0x4ac8d8], [0, 1.05, 0, .8, .2, .8, 0xc8ffff, 1]],
+     [[0, .3, 0, 1, .6, 1, 0xa8f0f8], [0, .8, 0, .6, .4, .6, 0xe0ffff]],
+     [[0, .6, 0, 1, .25, .35, 0x2af0ff, 1], [0, .25, 0, 1, .25, .35, 0xffffff, 1], [-1, .5, 0, .03, 1.1, .8, 0x1a5a66], [1, .5, 0, .03, 1.1, .8, 0x1a5a66]],
+     [[0, .3, 0, .7, .6, .7, 0x6adce6], [0, .75, 0, .45, .5, .45, 0xa8f0f8], [0, 1.05, 0, .2, .3, .2, 0xffffff]]],
+    /* 7 Neptun: Sturmblock, Methanwolke, Kryo-Kristall, Windbarriere, Eissäule */
+    [[[0, .5, 0, 1, 1, 1, 0x2a4ad8], [0, .5, 0, 1.03, .12, 1.03, 0x9ad0ff], [0, .9, 0, 1.03, .1, 1.03, 0xffffff]],
+     [[0, .3, 0, 1, .6, 1, 0xe8f0ff], [0, .8, 0, .7, .5, .7, 0xc0d4ff]],
+     [[0, .3, 0, .7, .6, .7, 0x3a62f0], [0, .8, 0, .45, .5, .45, 0x8ab4ff, 1]],
+     [[0, .7, 0, 1, .25, .5, 0xffffff], [0, .35, 0, 1, .25, .5, 0x2a4ad8], [-1, .5, 0, .03, 1.1, .8, 0x142872], [1, .5, 0, .03, 1.1, .8, 0x142872]],
+     [[0, .5, 0, .5, 1, .5, 0x4a78ff], [0, 1.05, 0, 1, .1, 1, 0x9ad0ff, 1]]],
+    /* 8 Pluto & Kuipergürtel: Stickstoffeis, Kraterfels, Methanreif, Eismauer, Eisturm */
+    [[[0, .45, 0, 1, .9, 1, 0xe0d4cc], [0, 1.0, 0, .9, .12, .9, 0xffffff], [0, .5, 0, 1.03, .1, 1.03, 0xb89c8c]],
+     [[0, .35, 0, 1, .7, 1, 0x8a7a78], [0, .85, 0, .6, .3, .6, 0x9a8a88]],
+     [[0, .3, 0, 1, .6, 1, 0xf0e8e4], [0, .75, 0, .7, .4, .7, 0xffffff]],
+     [[0, .5, 0, 1, 1, .8, 0xd8ccc4], [0, 1.02, 0, 1, .06, .8, 0xffffff], [-.6, .5, 0, .02, 1.05, 1, 0x8a7a78], [.1, .5, 0, .02, 1.05, 1, 0x8a7a78], [.6, .5, 0, .02, 1.05, 1, 0x8a7a78]],
+     [[0, .3, 0, .8, .6, .8, 0xd8ccc4], [0, .75, 0, .5, .5, .5, 0xe8dcd4], [0, 1.05, 0, .25, .3, .25, 0xffffff]]],
+    /* 9 Oortsche Wolke: Kometenkern, Eiskristall, Staubbrocken, Trümmerbalken, Eisnadel */
+    [[[0, .4, 0, 1, .8, 1, 0x8a98b8], [.2, .9, 0, .7, .4, .7, 0xdfeaff], [-.3, .5, .55, .3, .3, .2, 0x5a6a90]],
+     [[0, .3, 0, 1, .6, 1, 0x9ad0ff], [0, .8, 0, .6, .5, .6, 0xdfffff, 1]],
+     [[0, .35, 0, 1, .7, 1, 0x4a5a7a], [.15, .85, 0, .65, .4, .65, 0x6a7a9a]],
+     [[0, .6, 0, 1, .3, .5, 0x9ab0d0], [0, .3, 0, 1, .3, .5, 0x6a8ae0], [-1, .5, 0, .03, 1.1, .8, 0x3a4c70], [1, .5, 0, .03, 1.1, .8, 0x3a4c70]],
+     [[0, .3, 0, .7, .6, .7, 0x8aa8d8], [0, .75, 0, .45, .5, .45, 0xc8dcff], [0, 1.05, 0, .2, .3, .2, 0xffffff]]],
+    /* 10 Fremder Stern: Magmabrocken, Glutsäule, Sonnenfleck, Flammenbalken, Eruptionsspitze */
+    [[[0, .5, 0, 1, 1, 1, 0x3a1a14], [0, .5, 0, 1.03, .14, 1.03, 0xff6a10, 1], [.2, .5, 0, .1, 1.02, 1.03, 0xffb030, 1]],
+     [[0, .5, 0, .5, 1, .5, 0x2a1410], [0, 1.05, 0, .8, .15, .8, 0xff8a20, 1]],
+     [[0, .3, 0, 1, .6, 1, 0x1a0a08], [0, .65, 0, .7, .1, .7, 0xff5a10, 1]],
+     [[0, .75, 0, 1, .25, .4, 0xff6a10, 1], [0, .35, 0, 1, .25, .4, 0x3a1a14], [-1, .5, 0, .03, 1.1, .8, 0x2a1410], [1, .5, 0, .03, 1.1, .8, 0x2a1410]],
+     [[0, .3, 0, .7, .6, .7, 0x3a1a14], [0, .75, 0, .45, .5, .45, 0x5a2a1a], [0, 1.05, 0, .2, .3, .2, 0xffb030, 1]]],
+    /* 11 Milchstraße: Kristallblock, Sternenstaub-Säule, Nebelkugel, Lichtbalken, Prisma */
+    [[[0, .5, 0, 1, 1, 1, 0x5a4aa8], [0, 1.02, 0, .9, .1, .9, 0xc8b8ff, 1], [0, .5, 0, 1.03, .1, 1.03, 0x40f0ff, 1]],
+     [[0, .5, 0, .5, 1, .5, 0x3a2a78], [0, .3, 0, .6, .06, .6, 0x40f0ff, 1], [0, .7, 0, .6, .06, .6, 0xff6ad8, 1]],
+     [[0, .4, 0, 1, .8, 1, 0x7a58c8], [0, .9, 0, .6, .3, .6, 0xff9ae8, 1]],
+     [[0, .6, 0, 1, .25, .35, 0xff6ad8, 1], [0, .25, 0, 1, .25, .35, 0x40f0ff, 1], [-1, .5, 0, .03, 1.1, .8, 0x241a4c], [1, .5, 0, .03, 1.1, .8, 0x241a4c]],
+     [[0, .3, 0, .7, .6, .7, 0x5a4aa8], [0, .75, 0, .45, .5, .45, 0xa08aff], [0, 1.05, 0, .2, .3, .2, 0xffffff, 1]]],
+    /* 12 Andromeda: Sternenstein, Kristall, Energiekern, Laserbarriere, Energiesäule */
+    [[[0, .5, 0, 1, 1, 1, 0x1a6a90], [0, 1.02, 0, .9, .08, .9, 0x9ad8ff], [0, .5, 0, 1.03, .1, 1.03, 0xff6ad8, 1]],
+     [[0, .3, 0, 1, .6, 1, 0x2a98c0], [0, .8, 0, .6, .5, .6, 0x9ae8ff, 1]],
+     [[0, .4, 0, 1, .8, 1, 0x103e58], [0, .9, 0, .6, .3, .6, 0xff6ad8, 1]],
+     [[0, .6, 0, 1, .2, .3, 0xff2a5a, 1], [0, .3, 0, 1, .2, .3, 0x4ad0ff, 1], [-1, .5, 0, .03, 1.1, .8, 0x103e58], [1, .5, 0, .03, 1.1, .8, 0x103e58]],
+     [[0, .5, 0, .4, 1, .4, 0x1a6a90], [0, .3, 0, .55, .06, .55, 0x4ad0ff, 1], [0, .7, 0, .55, .06, .55, 0xff6ad8, 1], [0, 1.05, 0, 1, .1, 1, 0xffffff, 1]]],
+    /* 13 Rand des Universums: Leerekristall, Lichtwürfel, Singularität, Grenzbalken, Obelisk */
+    [[[0, .5, 0, 1, 1, 1, 0x1a1030], [0, .5, 0, 1.03, .1, 1.03, 0xffffff, 1], [0, 1.02, 0, .9, .06, .9, 0xff5ad8, 1]],
+     [[0, .5, 0, 1, 1, 1, 0xffffff, 1], [0, .5, 0, .6, .6, .6, 0xff5ad8, 1]],
+     [[0, .4, 0, 1, .8, 1, 0x0a0614], [0, .85, 0, .6, .2, .6, 0xffffff, 1]],
+     [[0, .6, 0, 1, .25, .4, 0xffffff, 1], [0, .25, 0, 1, .25, .4, 0x1a1030], [-1, .5, 0, .03, 1.1, .8, 0x7a6aa0], [1, .5, 0, .03, 1.1, .8, 0x7a6aa0]],
+     [[0, .5, 0, .4, 1, .4, 0x1a1030], [0, .3, 0, .55, .06, .55, 0xffffff, 1], [0, .7, 0, .55, .06, .55, 0xff5ad8, 1], [0, 1.05, 0, .9, .1, .9, 0xffffff, 1]]],
+    /* 14 Erde (Wolken): Gewitterwolke, Wolkensäule, Sturmwolke, Regenbogen-Balken */
     [[[0, .5, 0, 1, 1, 1, 0x8a93b0], [0, 1.02, 0, .9, .15, .9, 0xb9c4ee], [0, .5, 0, 1.03, .1, 1.03, 0xffe14a, 1]],
      [[0, .3, 0, 1, .6, 1, 0xffffff], [0, .8, 0, .7, .5, .7, 0xe6ecff]],
      [[0, .5, 0, 1, 1, 1, 0x6a7290], [0, 1.02, 0, .8, .15, .8, 0x9aa6c8], [0, .5, 0, .1, 1.02, 1.03, 0xffe14a, 1]],
      [[0, .75, 0, 1, .25, .6, 0xff5a5a], [0, .5, 0, 1, .25, .6, 0xffe14a], [0, .25, 0, 1, .25, .6, 0x4cc2ff], [-1, .5, 0, .03, 1.1, .8, 0xffffff], [1, .5, 0, .03, 1.1, .8, 0xffffff]],
      [[0, .3, 0, 1, .6, 1, 0xffffff], [0, .8, 0, .7, .5, .7, 0xe6ecff]]],
-    /* 13 Weltraum: Asteroid, Kristall, Riesen-Asteroid, Trümmerbalken */
-    [[[0, .4, 0, 1, .8, 1, 0x6a6a78], [.2, .9, 0, .7, .4, .7, 0x7a7a88]],
-     [[0, .3, 0, 1, .6, 1, 0x3ab8d8], [0, .8, 0, .6, .5, .6, 0x7ae0ff, 1]],
-     [[0, .35, 0, 1, .7, 1, 0x5a5a68], [.15, .85, 0, .65, .4, .65, 0x6a6a78], [-.3, .95, .2, .3, .2, .3, 0x8a8a98]],
-     [[0, .6, 0, 1, .3, .5, 0x9aa0aa], [0, .3, 0, 1, .3, .5, 0xd0a030], [-1, .5, 0, .03, 1.1, .8, 0x5a5f68], [1, .5, 0, .03, 1.1, .8, 0x5a5f68]],
-     [[0, .3, 0, 1, .6, 1, 0x3ab8d8], [0, .8, 0, .6, .5, .6, 0x7ae0ff, 1]]]
   ];
+const obrIdx = lv => (lv.w === 0 && lv.sky) ? 14 : lv.w;
 
 // Sichtbares Modell = Hitbox: jedes Rezept wird mittig ausgerichtet und so skaliert, dass seine Sichtkanten (Breite, Tiefe, Höhe) genau die Kollisionsbox füllen
 // (auch bei einseitigen Formen wie dem Kaktus mit nur einem Arm). Wo das Modell dafür zu stark vergrößert werden müsste, wird stattdessen die Hitbox verkleinert (OBRFIT).
@@ -584,17 +659,18 @@ function groundAt(u, z, y) {
 // Münzen/Hindernisse auf Absolut-Höhe bringen
 (function finalizeLevels() {
   for (const lv of LV) {
-    for (const o of lv.obs) if (!o.nodraw) { const f = OBRFIT[lv.w][o.k]; if (f) { o.hu *= f.x; o.hz *= f.z; o.top *= f.y; } } // Hitbox = sichtbare Form
+    for (const o of lv.obs) if (!o.nodraw) { const f = OBRFIT[obrIdx(lv)][o.k]; if (f) { o.hu *= f.x; o.hz *= f.z; o.top *= f.y; } } // Hitbox = sichtbare Form
     const surf = (u, z) => { const th = terrainH(lv.L, u, z); return baseAt(z) + (th === -Infinity ? 0 : th); }; // Fläche unter dem Hindernis (Insel-Höhenversatz!)
     for (const o of lv.obs) o.by = surf(o.u, o.z);
-    for (const m of lv.movers) m.by = surf(0, m.z);
-    for (const m of lv.timed) m.by = surf(m.u, m.z);
+    for (const m of lv.movers) { m.by = surf(m.u0 || 0, m.z); m.dy = m.by - baseAt(m.z); }
+    for (const m of lv.timed) { m.by = surf(m.u, m.z); m.dy = m.by - baseAt(m.z); }
     lv.coins = lv.coins.filter(c => {
       let ry = c.y; if (ry === null) { const h = terrainH(lv.L, c.u, c.z); if (h === -Infinity) return false; ry = h + 1.2; }
       for (const o of lv.obs) if (Math.abs(c.u - o.u) < o.hu + 1.2 && Math.abs(c.z - o.z) < o.hz + 1.2 && ry < o.top + 1) return false;
       c.y = baseAt(c.z) + ry; c.x = c.u; return true; });
   }
   let all = 0; for (const lv of LV) for (const c of lv.coins) all += (c.big ? 5 : 1) * WORLDS[lv.w].mult;
+  COIN_TARGET = Math.min(COIN_TARGET, all); PRICE_BASIS = Math.round(COIN_TARGET * 85350 / 55480); // Preise wachsen mit den tatsächlich einsammelbaren Münzen
   const keep = Math.min(1, COIN_TARGET / all);
   for (const lv of LV) { const rr = mulberry32(4242 + lv.L * 7919); lv.coins = lv.coins.filter((c, i) => i === 0 || rr() < keep); }
 })();
@@ -673,7 +749,7 @@ const loaded = {};
 
 const padGeo = new THREE.BoxGeometry(3.4, 0.3, 3.4), padMat = new THREE.MeshBasicMaterial({ color: 0xff5ad8 });
 function buildLevel(L) {
-  const lv = LV[L], W = WORLDS[lv.w], z0 = lv.z0, rnd = mulberry32(555 + L * 31337), sky = !!lv.sky;
+  const lv = LV[L], W = TH(lv), z0 = lv.z0, rnd = mulberry32(555 + L * 31337), sky = !!lv.sky;
   // Jedes Level bekommt einen eigenen Ursprung (Gleitkomma-Genauigkeit bei sehr großen Koordinaten)
   const mp = pathAt(z0 + LEN / 2), ox = mp.x, oy = mp.y, oz = mp.z, org = [ox, oy, oz];
   const grp = new THREE.Group(); grp.position.set(ox, oy, oz);
@@ -700,7 +776,7 @@ function buildLevel(L) {
   const cliffCol = jit(W.cliff, 0.05), wallCol = rgb(W.pitWall), inZ = (a, z) => a.some(m => z >= m.a && z < m.b);
   const inRamp = z => lv.ramps.some(r => z >= r.a && z < r.b), nearGap = z => lv.gaps.some(g => z >= g.a - 4 && z < g.a);
   const inLedge = z => lv.ledges.some(l => z >= l.a && z < l.b), bridgeAt = (u, z) => lv.gaps.some(g => g.bridge && z >= g.a && z < g.b && Math.abs(u) < g.bridge);
-  const moonC = [rgb(0xe4e4ec), rgb(0xd6d6e0)];
+  const moonC = [rgb(0xf4ecff), rgb(0xe6dcf8)];
   for (let i = 0; i < nR; i++) for (let j = 0; j < nC; j++) {
     const c = grid[i * nC + j];
     if (c.gap) { if (!sky) { const ua = -UW + j * CELL, ub = ua + CELL, pc = jit(ch(W.pit), 0.1), y = PITY + 0.02; H.quad(P(i, ua, y, 0), P(i, ub, y, 0), P(i, ub, y, 1), P(i, ua, y, 1), pc); } }
@@ -744,69 +820,9 @@ function buildLevel(L) {
   const layers = (B, x, y, z, base, hgt, n, cols, shrink) => { let b = base, yy = y; for (let k = 0; k < n; k++) { B.box(x, yy + hgt / 2, z, b, hgt, b * (0.8 + rnd() * 0.3), jit(cols[k % cols.length], 0.05), rnd() * 0.4); yy += hgt; b *= shrink; } };
   const stk = (B, x, y, z, parts) => { let yy = y; for (const p of parts) { B.box(x, yy + p[1] / 2, z, p[0], p[1], p[3] || p[0], jit(p[2], 0.08), rnd()); yy += p[1]; } };
   let flameCount = 0; const NEON = [0xff2ad0, 0x2af0ff, 0xffe14a, 0x6a4aff];
-  const fledi = (u, gy, z) => { const PKc = 0xff8ad8, bd = 0x3a2a5a; /* eigene Fledermaus-Kugel als Maskottchen-Statue (Gesicht zur Fahrtrichtung) */
-    D.box(u, gy + 1.0, z, 2.2, 1.9, 2.0, jit(bd, 0.05)); D.box(u, gy + 2.15, z, 1.8, 0.6, 1.7, jit(0x4a3470, 0.05));
-    for (const sd of [-1, 1]) { D.box(u + sd * 0.8, gy + 2.85, z, 0.55, 1.0, 0.4, rgb(bd), sd * 0.25); D.box(u + sd * 0.8, gy + 2.75, z - 0.12, 0.3, 0.6, 0.2, rgb(PKc)); D.box(u + sd * 1.55, gy + 1.2, z, 0.35, 0.9, 1.0, rgb(0x2a1a44), sd * 0.3);
-      GL.box(u + sd * 0.5, gy + 1.35, z - 1.02, 0.34, 0.5, 0.06, rgb(0xffffff)); GL.box(u + sd * 0.5, gy + 1.3, z - 1.05, 0.18, 0.28, 0.06, rgb(0x1a1028)); GL.box(u + sd * 0.95, gy + 0.85, z - 1.02, 0.4, 0.22, 0.06, rgb(PKc)); }
-    GL.box(u, gy + 2.2, z - 0.9, 0.5, 0.18, 0.06, rgb(0xffe14a)); GL.box(u, gy + 2.2, z - 0.9, 0.18, 0.5, 0.06, rgb(0xffe14a)); GL.box(u, gy + 0.65, z - 1.02, 0.5, 0.1, 0.06, rgb(0x1a1028)); };
-  const puddi = (u, gy, z) => { /* eigener Wackelpudding-Kumpel als Maskottchen-Statue */
-    D.box(u, gy + 1.0, z, 2.3, 2.0, 2.3, jit(0xffe680, 0.03)); D.box(u, gy + 2.1, z, 2.5, 0.35, 2.5, rgb(0xc8802a)); D.box(u + 0.9, gy + 1.7, z - 1.2, 0.4, 0.8, 0.1, rgb(0xc8802a)); D.box(u - 0.5, gy + 1.9, z - 1.2, 0.35, 0.5, 0.1, rgb(0xc8802a));
-    D.box(u, gy + 2.6, z, 0.5, 0.5, 0.5, rgb(0xff3a4a)); D.box(u + 0.1, gy + 3.0, z, 0.12, 0.4, 0.12, rgb(0x3a8a2a));
-    for (const sd of [-1, 1]) { GL.box(u + sd * 0.6, gy + 1.3, z - 1.16, 0.2, 0.3, 0.06, rgb(0x2a1a10)); GL.box(u + sd * 0.85, gy + 0.85, z - 1.16, 0.4, 0.22, 0.06, rgb(0xff9ab8)); D.box(u + sd * 0.7, gy + 0.15, z, 0.7, 0.3, 0.9, rgb(0xd8a840)); }
-    GL.box(u, gy + 0.85, z - 1.16, 0.5, 0.1, 0.06, rgb(0x2a1a10)); };
   const DEC = [
     (u, gy, z, r) => { if (r < 0.5) tree(u, gy, z, 0.8 + rnd() * 0.9); else if (r < 0.66) D.box(u, gy + 0.5, z, 1.6, 1.0, 1.6, jit(0x3b9a35, 0.12), rnd()); else if (r < 0.76) rock(u, gy, z, 0.8 + rnd(), 0x8a8f98);
       else if (r < 0.9) { const fc = ch([0xffffff, 0xffe14a, 0xff7ab8, 0xc06bff]); for (let k = 0; k < 3; k++) D.box(u + rnd() * 2, gy + 0.25, z + rnd() * 2, 0.35, 0.5, 0.35, rgb(fc)); } },
-    (u, gy, z, r, s, hw) => { if (r < 0.2) { const h = 2.5 + rnd() * 2.5; D.box(u, gy + h / 2, z, 0.9, h, 0.9, jit(0x3f9a3f, 0.1)); D.box(u + 0.9, gy + h * 0.6, z, 0.9, 0.5, 0.5, jit(0x3f9a3f, 0.1)); D.box(u + 1.25, gy + h * 0.6 + 0.9, z, 0.5, 1.4, 0.5, jit(0x3f9a3f, 0.1)); }
-      else if (r < 0.42) rock(u, gy, z, 1 + rnd() * 1.6, 0xb0623a);
-      else if (r < 0.7) { const o2 = hw + 6 + rnd() * 34; layers(D, s * o2, sr(Math.min(o2, UW), z), z, 5 + rnd() * 9, 3 + rnd() * 2.5, 3 + Math.floor(rnd() * 3), [0xc9743f, 0xb8653a, 0xd98a50, 0xa85a35], 0.86); } },
-    (u, gy, z, r) => { if (r < 0.4) { const h = 5 + rnd() * 5; D.box(u, gy + h / 2, z, 1.3, h, 1.3, jit(0x5a3a1e, 0.1)); layers(D, u, gy + h, z, 5.5 + rnd() * 2, 1.6, 2, [0x1f6b25, 0x2f8f3a], 0.65); }
-      else if (r < 0.62) stk(D, u, gy, z, [[2.4, 1.0, 0x2f8f3a], [1.6, 0.8, 0x3fae4a]]); else if (r < 0.76) rock(u, gy, z, 0.9 + rnd(), 0x5a6a4a);
-      else if (r < 0.9) { for (let k = 0; k < 3; k++) D.box(u + (rnd() - 0.5) * 2, gy + 2.5, z + (rnd() - 0.5) * 2, 0.15, 5, 0.15, jit(0x2f8f3a, 0.1)); }
-      else for (let k = 0; k < 3; k++) D.box(u + rnd() * 2, gy + 0.3, z + rnd() * 2, 0.5, 0.6, 0.5, rgb(0xff3a3a)); },
-    (u, gy, z, r) => { if (r < 0.3) { const h = 4 + rnd() * 3; D.box(u, gy + h / 2, z, 0.5, h, 0.5, jit(0x2a2218, 0.1)); D.box(u + 0.7, gy + h * 0.7, z, 1.4, 0.3, 0.3, jit(0x2a2218, 0.1)); D.box(u - 0.6, gy + h * 0.5, z, 1.2, 0.3, 0.3, jit(0x2a2218, 0.1)); }
-      else if (r < 0.55) { for (let k = 0; k < 4; k++) D.box(u + (rnd() - 0.5) * 1.6, gy + 1.3, z + (rnd() - 0.5) * 1.6, 0.18, 2.6 + rnd(), 0.18, jit(0x8a9a3a, 0.12)); }
-      else if (r < 0.72) GL.box(u, gy + 0.03, z, 3 + rnd() * 4, 0.06, 3 + rnd() * 4, rgb(0x556b2f), rnd());
-      else if (r < 0.86) stk(D, u, gy, z, [[0.4, 0.9, 0xe8e0c8], [1.5, 0.6, ch([0xc03a3a, 0x8a4ac0])]]); else rock(u, gy, z, 0.9 + rnd(), 0x4a4a3a); },
-    (u, gy, z, r) => { if (r < 0.3) { const c = ch([0xff6a8a, 0xff9a3a, 0xff5ac0]); stk(D, u, gy, z, [[1.0, 1.2, c], [1.6, 0.8, c], [0.8, 1.0, c]]); }
-      else if (r < 0.55) { const h = 4 + rnd() * 5; D.box(u, gy + h / 2, z, 0.35, h, 0.35, jit(0x2fa060, 0.12)); D.box(u + 0.3, gy + h * 0.7, z, 0.3, h * 0.4, 0.3, jit(0x2fa060, 0.12)); }
-      else if (r < 0.72) rock(u, gy, z, 1 + rnd() * 1.5, 0x6a7a8a); else if (r < 0.85) stk(D, u, gy, z, [[2.4, 0.6, 0x9a4ac0], [1.4, 0.8, 0xc06ae0]]); else D.box(u, gy + 0.25, z, 1.4, 0.5, 1.2, jit(0xffb0c8, 0.05), rnd()); },
-    (u, gy, z, r) => { if (r < 0.32) layers(D, u, gy, z, 2 + rnd() * 2.5, 2.2, 3, [0xbfe8ff, 0x9fd8ff, 0xe8f8ff], 0.6); else if (r < 0.55) D.box(u, gy + 0.6, z, 3 + rnd() * 3, 1.2, 3 + rnd() * 3, jit(0xffffff, 0.03), rnd());
-      else if (r < 0.72) { const h = 2 + rnd() * 2; D.box(u, gy + h / 2, z, 0.6, h, 0.6, rgb(0x5a6a7a)); layers(D, u, gy + h, z, 3, 1.3, 3, [0xffffff, 0xd8efff], 0.65); }
-      else if (r < 0.85) rock(u, gy, z, 0.9 + rnd(), 0xa8bcd0); else stk(D, u, gy, z, [[1.8, 1.4, 0xffffff], [1.3, 1.1, 0xffffff], [0.9, 0.8, 0xffffff]]); },
-    (u, gy, z, r) => { if (r < 0.3) { const h = 3 + rnd() * 5; D.box(u, gy + h / 2, z, 1.4 + rnd(), h, 1.2 + rnd(), jit(0x8a8680, 0.1), rnd()); } else if (r < 0.55) rock(u, gy, z, 1.8 + rnd() * 2, 0x6a6660);
-      else if (r < 0.72) layers(D, u, gy, z, 4 + rnd() * 4, 1.4, 3, [0x8a8680, 0x7a766f, 0x9a968f], 0.8);
-      else if (r < 0.86) { for (let k = 0; k < 3; k++) D.box(u + (rnd() - 0.5) * 2, gy + 1.6, z + (rnd() - 0.5) * 2, 0.7, 3.2 + rnd() * 2, 0.7, jit(0x7a766f, 0.1), rnd()); } else rock(u, gy, z, 0.8 + rnd(), 0x8a8680); },
-    (u, gy, z, r) => { if (r < 0.22) { const h = 8 + rnd() * 6; D.box(u, gy + h / 2, z, 2, h, 2, jit(0x6a6f78, 0.06)); D.box(u, gy + h * 0.85, z, 2.2, 0.8, 2.2, rgb(0xd0a030)); }
-      else if (r < 0.44) { D.box(u, gy + 2, z, 3.5, 4, 3.5, jit(0x7a808a, 0.06)); D.box(u, gy + 4.2, z, 3.7, 0.5, 3.7, rgb(0xd0a030)); }
-      else if (r < 0.66) stk(D, u, gy, z, [[2, 1.6, 0xb8863a], [1.6, 1.4, 0xd0a030]]);
-      else if (r < 0.82) { D.box(u, gy + 2.5, z, 0.6, 0.6, 6 + rnd() * 6, rgb(0x9aa0aa)); D.box(u, gy + 1.2, z - 2, 0.4, 2.4, 0.4, rgb(0x5a5f68)); D.box(u, gy + 1.2, z + 2, 0.4, 2.4, 0.4, rgb(0x5a5f68)); }
-      else { D.box(u - 1.2, gy + 2, z, 0.4, 4, 0.4, rgb(0x5a5f68)); D.box(u + 1.2, gy + 2, z, 0.4, 4, 0.4, rgb(0x5a5f68)); D.box(u, gy + 4.1, z, 3, 0.4, 0.5, rgb(0xd0a030)); } },
-    (u, gy, z, r) => { const c = ch(NEON); if (r < 0.42) { const h = 8 + rnd() * 22, wd = 2.5 + rnd() * 3; D.box(u, gy + h / 2, z, wd, h, wd, jit(0x1a1830, 0.1));
-        for (let k = 0; k < Math.floor(h / 3); k++) GL.box(u, gy + 2 + k * 3, z, wd + 0.06, 0.35, wd + 0.06, rgb(rnd() < 0.7 ? c : 0x20204a)); GL.box(u, gy + h + 0.15, z, wd, 0.3, wd, rgb(c)); }
-      else if (r < 0.65) { D.box(u, gy + 3, z, 0.3, 6, 0.3, rgb(0x2a2650)); GL.box(u, gy + 6.3, z, 1.6, 0.5, 0.3, rgb(c)); }
-      else if (r < 0.85) GL.box(u, gy + 4 + rnd() * 3, z, 3, 1.4, 0.15, rgb(c)); else D.box(u, gy + 0.6, z, 1.6, 1.2, 1.6, jit(0x1a1830, 0.1), rnd()); },
-    (u, gy, z, r) => { if (r < 0.32) layers(D, u, gy, z, 3 + rnd() * 4, 3.5 + rnd() * 2, 3 + Math.floor(rnd() * 3), [0x2c1f24, 0x392a30, 0x1f151a], 0.68); else if (r < 0.5) GL.box(u, gy + 0.03, z, 3 + rnd() * 5, 0.06, 3 + rnd() * 5, rgb(ch([0xff7a1a, 0xff5a10, 0xffa020])), rnd());
-      else if (r < 0.7) rock(u, gy, z, 1 + rnd() * 1.8, 0x3a2a2e);
-      else if (r < 0.78 && flameCount < 8) { flameCount++; D.box(u, gy + 0.6, z, 1.8, 1.2, 1.8, rgb(0x2c1f24));
-        const fa = new THREE.Mesh(flameGeo, flameMatA), fb = new THREE.Mesh(flameGeo, flameMatB), w0 = WL(u, gy + 2, z); fa.position.set(w0[0], w0[1], w0[2]); fb.position.set(w0[0], w0[1] + 0.6, w0[2]);
-        grp.add(fa, fb); flames.push({ a: fa, b: fb, ph: rnd() * 6, y: w0[1] - 0.8 }); } }  ,
-    (u, gy, z, r) => { const PK = 0xff6ac8;
-      if (r < 0.2) fledi(u, gy, z);
-      else if (r < 0.36) { D.box(u, gy + 2, z, 0.3, 4, 0.3, rgb(0x2a1a44)); GL.box(u, gy + 4.4, z, 1.4, 0.4, 0.4, rgb(0xffe14a)); GL.box(u, gy + 4.4, z, 0.4, 1.4, 0.4, rgb(0xffe14a)); GL.box(u, gy + 4.4, z, 0.9, 0.9, 0.3, rgb(0xfff0a0)); }
-      else if (r < 0.5) { const h = 4 + rnd() * 3; D.box(u, gy + h / 2, z, 0.7, h, 0.7, jit(0x2a1a3a, 0.1), rnd() * 0.3); layers(D, u, gy + h, z, 4 + rnd() * 2, 1.4, 3, [0x6a3a9a, 0x8a4ac0, 0x5a2a8a], 0.66); GL.box(u + 1, gy + h + 1.2, z, 0.35, 0.35, 0.35, rgb(PK)); }
-      else if (r < 0.62) { D.box(u, gy + 1.6, z, 0.15, 3.2, 0.15, rgb(0x3a2a4a)); D.box(u, gy + 3.4, z, 0.9, 0.7, 0.7, rgb(0x2a1a44)); D.box(u - 0.9, gy + 3.5, z, 1.0, 0.12, 0.6, rgb(0x4a2a6a), 0.2); D.box(u + 0.9, gy + 3.5, z, 1.0, 0.12, 0.6, rgb(0x4a2a6a), -0.2); GL.box(u - 0.2, gy + 3.5, z - 0.36, 0.14, 0.14, 0.05, rgb(PK)); GL.box(u + 0.2, gy + 3.5, z - 0.36, 0.14, 0.14, 0.05, rgb(PK)); }
-      else if (r < 0.74) { for (let k = 0; k < 3; k++) { const hh = 1.5 + rnd() * 2.2; GL.box(u + (rnd() - 0.5) * 1.6, gy + hh / 2, z + (rnd() - 0.5) * 1.6, 0.5, hh, 0.5, rgb(ch([0xc05af0, 0xff6ac8, 0x8a5aff])), rnd()); } }
-      else if (r < 0.86) { stk(D, u, gy, z, [[0.4, 1.0, 0x3a2a5a], [1.8, 0.6, 0x8a4ac0]]); GL.box(u, gy + 1.65, z, 1.2, 0.08, 1.2, rgb(PK)); }
-      else { for (let k = 0; k < 6; k++) D.box(u, gy + 0.5 + k * 0.7, z, 0.5, 0.7, 0.5, rgb(k & 1 ? 0xffffff : PK)); D.box(u + 0.4, gy + 4.4, z, 1.0, 0.5, 0.5, rgb(PK)); } },
-    (u, gy, z, r) => {
-      if (r < 0.2) puddi(u, gy, z);
-      else if (r < 0.36) { stk(D, u, gy, z, [[1.6, 0.9, 0xfff0a0], [2.0, 0.5, 0xffe680]]); D.box(u, gy + 1.5, z, 2.1, 0.2, 2.1, rgb(0xc8802a)); D.box(u, gy + 1.75, z, 0.4, 0.4, 0.4, rgb(0xff3a4a)); }
-      else if (r < 0.5) { D.box(u, gy + 0.8, z, 0.9, 1.6, 0.9, rgb(0xd9a45a), 0.4); D.box(u, gy + 2.0, z, 2.0, 1.0, 2.0, jit(0xfff0d0, 0.03)); D.box(u, gy + 2.9, z, 1.6, 0.9, 1.6, jit(ch([0xffb8d8, 0xb8e8ff, 0xd8ffb8]), 0.03)); D.box(u, gy + 3.5, z, 0.3, 0.3, 0.3, rgb(0xff3a4a)); }
-      else if (r < 0.62) { layers(D, u, gy, z, 2.2 + rnd(), 0.8, 4, [0xffffff, 0xfff8e8], 0.72); D.box(u, gy + 3.5, z, 0.35, 0.35, 0.35, rgb(0xff3a4a)); }
-      else if (r < 0.74) { D.box(u, gy + 1.6, z, 0.2, 3.2, 0.2, rgb(0xffffff)); D.box(u, gy + 3.6, z, 1.8, 1.8, 0.35, jit(ch([0xff8ac0, 0xffd23a, 0x8adcff]), 0.05)); D.box(u, gy + 3.6, z - 0.2, 1.0, 1.0, 0.2, rgb(0xffffff)); }
-      else if (r < 0.86) { D.box(u, gy + 0.6, z, 1.6, 1.2, 1.6, rgb(0xd9a45a)); D.box(u, gy + 1.5, z, 1.9, 0.7, 1.9, rgb(ch([0xffffff, 0xffb8d8]))); D.box(u, gy + 2.0, z, 1.0, 0.5, 1.0, rgb(0xfff0d0)); D.box(u, gy + 2.4, z, 0.3, 0.3, 0.3, rgb(0xff3a4a)); }
-      else stk(D, u, gy, z, [[2.2, 0.35, 0xd9a45a], [2.0, 0.35, 0xc8802a], [2.2, 0.35, 0xd9a45a], [1.8, 0.35, 0xc8802a]]); }
   ];
   if (!sky) {
     const step = 4.5, far = W.far;
@@ -821,23 +837,67 @@ function buildLevel(L) {
       if (lv.w === 9) GL.box(s * o, fy + 9, z, 26, 0.6, 26, rgb(0xff5a10)); }
     for (let zz = z0; zz < z0 + LEN; zz += 46) { const u = (rnd() - 0.5) * 260, y = 58 + rnd() * 26, z = zz + rnd() * 40, cc = rgb(W.cloud);
       for (let k = 0; k < 4; k++) CL.box(u + k * 7 - 10, y + (rnd() - 0.5) * 3, z + (rnd() - 0.5) * 6, 9 + rnd() * 6, 3 + rnd() * 2, 8 + rnd() * 4, cc); }
-  } else if (lv.w === 12) {
-    /* Himmel: schwebende Wolken, Wolkenmeer, Wolkentürme */
+  } else if (lv.w === 0) {
+    /* Erde (Wolken): schwebende Wolken, Wolkenmeer, Wolkentürme */
     for (let zz = z0; zz < z0 + LEN; zz += 14) for (const s of [-1, 1]) { const off = 16 + rnd() * 60, y = -30 + rnd() * 60, z = zz + rnd() * 14, k = 3 + Math.floor(rnd() * 3);
       for (let q = 0; q < k; q++) CL.box(s * off + (rnd() - 0.5) * 10, y + (rnd() - 0.5) * 2, z + (rnd() - 0.5) * 10, 6 + rnd() * 8, 2 + rnd() * 3, 6 + rnd() * 8, jit(0xffffff, 0.03)); }
     for (let zz = z0; zz < z0 + LEN; zz += 30) { const s = rnd() < 0.5 ? -1 : 1; layers(CL, s * (50 + rnd() * 90), -75, zz + rnd() * 30, 30 + rnd() * 30, 8, 4, [0xffffff, 0xeef3ff, 0xe0e9ff], 0.72); }
-    for (let zz = z0; zz < z0 + LEN; zz += 20) CL.box((rnd() - 0.5) * 300, -45 - rnd() * 10, zz + 10, 70 + rnd() * 40, 5, 26, jit(0xf4f8ff, 0.03));
   } else {
-    /* Weltraum: Sterne, Planeten, Asteroiden; am Ende die Mond-Zielinsel */
-    for (let zz = z0; zz < z0 + LEN; zz += 3) for (let k = 0; k < 3; k++) CL.box((rnd() - 0.5) * 420, -70 + rnd() * 170, zz + rnd() * 3, 0.7, 0.7, 0.7, rgb(rnd() < 0.85 ? 0xffffff : ch([0xffe14a, 0x9ac8ff, 0xff9ad0])));
-    for (let zz = z0; zz < z0 + LEN; zz += 75) { const s = rnd() < 0.5 ? -1 : 1, wd = 24 + rnd() * 22, c = ch([0xc8703a, 0x3a86ff, 0xa06bff, 0x35d06a, 0xe8b923]), uu = s * (90 + rnd() * 120), yy = -20 + rnd() * 80, zp = zz + rnd() * 60;
-      CL.box(uu, yy, zp, wd, wd, wd, jit(c, 0.05), 0.6); CL.box(uu, yy, zp, wd * 1.8, 1.2, wd * 1.8, jit(0xe8d8b0, 0.05), 0.6); }
-    for (let zz = z0; zz < z0 + LEN; zz += 10) for (const s of [-1, 1]) { const off = 14 + rnd() * 46, y = -35 + rnd() * 70, z = zz + rnd() * 10, sz = 1.5 + rnd() * 4; D.box(s * off, y, z, sz * 1.5, sz, sz * 1.2, jit(0x6a6a78, 0.15), rnd() * 3); }
-    if (lv.moon) {
-      CL.box(0, 30, z0 + LEN + 170, 110, 110, 110, jit(0xd8d8e2, 0.03)); for (let k = 0; k < 14; k++) CL.box((rnd() - 0.5) * 90, 30 + (rnd() - 0.5) * 90, z0 + LEN + 114, 8 + rnd() * 14, 8 + rnd() * 14, 2, jit(0xa8a8b6, 0.06));
-      CL.box(-140, 70, z0 + LEN - 60, 46, 46, 46, jit(0x3a86ff, 0.04), 0.4); for (let k = 0; k < 6; k++) CL.box(-140 + (rnd() - 0.5) * 30, 70 + (rnd() - 0.5) * 30, z0 + LEN - 60 - 24, 10 + rnd() * 10, 8 + rnd() * 10, 2, jit(0x35d06a, 0.05), 0.4);
-      for (let k = 0; k < 18; k++) { const uu = (rnd() - 0.5) * 60, zc = z0 + LEN - 66 + rnd() * 60; if (Math.abs(uu) > 12 || zc < z0 + LEN - 30) GL.box(uu, 0.05, zc, 3 + rnd() * 5, 0.06, 3 + rnd() * 5, rgb(0xa0a0ae), rnd()); }
-    }
+    /* Weltraum-Kulisse je Welt: Sternenfeld, große Himmelskörper, schwebende Brocken, Gesteinstürme */
+    const w = lv.w, par = L % 2 ? -1 : 1, fin = L === NLEV - 1;
+    const SD = [0, 3, 1, 3, 1, 2, 2, 2, 3, 4, 1, 6, 4, 1][w], DB = [0, 1, 0.8, 2.6, 0.7, 0.7, 0.7, 0.7, 1.1, 1.6, 1.0, 0.5, 0.6, 0.3][w], TW = [0, 0.5, 0.9, 0.3, 0.6, 0.5, 0.5, 0.6, 0.7, 0.2, 0.5, 0.7, 0.4, 0.2][w];
+    const orb = (u, y, z, r, cols, n) => { n = n || 9; for (let i = 0; i < n; i++) { const t = (i + 0.5) / n * 2 - 1, rr = r * Math.sqrt(1 - t * t) + 0.01, hh = 2 * r / n * 1.04, c = jit(cols[i % cols.length], 0.035); CL.box(u, y + t * r, z, rr * 2, hh, rr * 2, c, 0); CL.box(u, y + t * r, z, rr * 2, hh, rr * 2, c, 0.785); } };
+    const ringH = (u, y, z, R, wd, cols) => { for (let k = 0; k < 14; k++) { const a = k / 14 * TAU; CL.box(u + R * Math.cos(a), y, z + R * Math.sin(a), 2 * Math.PI * R / 14 * 1.08, 0.7, wd, jit(cols[k % cols.length], 0.05), -(a + Math.PI / 2)); } };
+    const ringV = (u, y, z, R, sz, c, n) => { n = n || 30; for (let k = 0; k < n; k++) { const a = k / n * TAU; CL.box(u + R * Math.cos(a), y + R * Math.sin(a), z, sz, sz, sz, jit(c, 0.08), 0); } };
+    const U0 = r => par * (r + 28 + rnd() * 40), Y0 = () => 22 + rnd() * 40, ZP = () => z0 + 215 + rnd() * 40;
+    /* Sterne */
+    for (let zz = z0; zz < z0 + LEN; zz += 3) for (let k = 0; k < SD; k++) CL.box((rnd() - 0.5) * 420, -70 + rnd() * 170, zz + rnd() * 3, 0.7, 0.7, 0.7, rgb(rnd() < 0.85 ? 0xffffff : ch([0xffe14a, 0x9ac8ff, 0xff9ad0])));
+    /* Gesteinstürme unter der Strecke */
+    for (let zz = z0; zz < z0 + LEN; zz += 55) if (rnd() < TW) { const s = rnd() < 0.5 ? -1 : 1; layers(CL, s * (55 + rnd() * 100), -62 - rnd() * 18, zz + rnd() * 40, 18 + rnd() * 22, 7, 3 + Math.floor(rnd() * 2), [W.cliff, W.pitWall, W.road[0]], 0.7); }
+    /* Brocken nahe der Strecke */
+    for (let zz = z0; zz < z0 + LEN; zz += 10 / DB) for (const s of [-1, 1]) { const off = 14 + rnd() * 46, y = -35 + rnd() * 70, z = zz + rnd() * 10, sz = 1.5 + rnd() * 4; D.box(s * off, y, z, sz * 1.5, sz, sz * 1.2, jit(W.cliff, 0.18), rnd() * 3); }
+    if (w === 1) { /* Mond: die Erde als blaue Kugel */
+      const r = 30, u = U0(r), y = Y0(), z = ZP(); orb(u, y, z, r, [0x2a62c8, 0x3a86ff, 0x2f9a58, 0x3a86ff, 0xf4f8ff, 0x2a62c8, 0x3a86ff, 0x2f9a58, 0xf4f8ff], 9);
+      orb(-u * 0.6, y + 40, z + 70, 4, [0xb8b8c0, 0xa0a0a8], 5); }
+    else if (w === 2) { /* Mars: Phobos, Deimos, ferne Sonne */
+      orb(par * 90, 40, z0 + 230, 6, [0x8a7a6a, 0x9a8a7a, 0x7a6a5a], 5); orb(-par * 120, 62, z0 + 270, 3.5, [0x9a8a7a, 0x8a7a6a], 5); CL.box(par * 160, 70, z0 + 290, 7, 7, 7, rgb(0xfff2c8), 0.4); }
+    else if (w === 3) { /* Asteroidengürtel: ferne Riesenbrocken und winzige Sonne */
+      for (let k = 0; k < 4; k++) { const s = rnd() < 0.5 ? -1 : 1, sz = 10 + rnd() * 16; CL.box(s * (80 + rnd() * 120), -10 + rnd() * 80, z0 + 120 + rnd() * 160, sz * 1.3, sz, sz * 1.1, jit(0x6a5e54, 0.12), rnd() * 3); }
+      CL.box(-par * 150, 60, z0 + 300, 5, 5, 5, rgb(0xfff4d0), 0.4); }
+    else if (w === 4) { /* Jupiter: Riesenplanet mit Bändern, Großer Roter Fleck, Io und Europa */
+      const r = 62, u = U0(r), y = Y0(), z = ZP(); orb(u, y, z, r, [0xe8d4b0, 0xd49a5a, 0xf4e8d0, 0xb86a3a, 0xe8c08a, 0xa85a2a, 0xf0dcb8, 0xc88a4a, 0xe8d4b0], 11);
+      CL.box(u - par * r * 0.3, y - r * 0.25, z - r * 0.97, 14, 8, 3, rgb(0xb8442a)); orb(u - par * (r + 34), y + 22, z - 24, 5, [0xf0d850, 0xe0b830], 5); orb(u - par * (r + 20), y - 24, z - 40, 4, [0xf4f4f4, 0xd8d8e0], 5); }
+    else if (w === 5) { /* Saturn: Planet mit Ringsystem */
+      const r = 44, u = U0(84), y = Y0(), z = ZP(); orb(u, y, z, r, [0xe8d8a0, 0xd8c488, 0xf0e4b8, 0xc8b078, 0xe8d8a0, 0xd8c488, 0xf0e4b8], 9);
+      ringH(u, y, z, 84, 14, [0xd8c898, 0xb8a878, 0xe8dcb0, 0x9a8a66]); ringH(u, y, z, 68, 7, [0xe8dcb0, 0xc8b88a]); orb(u - par * 120, y + 18, z - 50, 4, [0xe8e0d0, 0xc8c0b0], 5); }
+    else if (w === 6) { /* Uranus: blasser Eisriese mit senkrechtem Ring */
+      const r = 38, u = U0(62), y = Y0() + 10, z = ZP(); orb(u, y, z, r, [0x9ae8f0, 0x8adce6, 0xa8f0f8, 0x8adce6, 0x9ae8f0], 9); ringV(u, y, z - r * 0.4, 62, 2.6, 0xc8ffff, 34); orb(u - par * 90, y + 24, z - 30, 4, [0xb0b8c0, 0x98a0a8], 5); }
+    else if (w === 7) { /* Neptun: tiefblauer Planet mit Sturmfleck, Triton */
+      const r = 44, u = U0(r), y = Y0(), z = ZP(); orb(u, y, z, r, [0x2a4ad8, 0x3a62f0, 0x2a4ad8, 0x4a78ff, 0x3a62f0, 0x1a34a8, 0x3a62f0, 0x2a4ad8, 0x3a62f0], 11);
+      CL.box(u - par * r * 0.25, y + r * 0.1, z - r * 0.98, 12, 7, 3, rgb(0x0e1c70)); CL.box(u + par * r * 0.4, y - r * 0.3, z - r * 0.95, 20, 2, 2.5, rgb(0xe8f0ff)); orb(u - par * (r + 36), y + 20, z - 30, 6, [0xe8b8c8, 0xd8a8b8], 5); }
+    else if (w === 8) { /* Pluto: kleiner Zwergplanet mit Herz, Charon */
+      const r = 24, u = U0(r), y = Y0(), z = ZP(), zf = z - r * 0.96; orb(u, y, z, r, [0xcbb8a8, 0xd8c8bc, 0xb8a090, 0xe8dcd0, 0xcbb8a8, 0xb89c8c, 0xd8c8bc], 9);
+      for (const sx of [-3, 3]) CL.box(u + sx, y + 6, zf, 5, 4, 1.5, rgb(0xf4eee8)); CL.box(u, y + 3, zf, 11, 3, 1.5, rgb(0xf4eee8)); CL.box(u, y, zf, 7, 3, 1.5, rgb(0xf4eee8)); CL.box(u, y - 3, zf, 3, 3, 1.5, rgb(0xf4eee8));
+      orb(u - par * 48, y + 14, z - 30, 11, [0x9a9aa4, 0x8a8a94, 0xa8a8b2], 7); }
+    else if (w === 9) { /* Oortsche Wolke: Eisschwarm und Kometen mit Schweif */
+      for (let zz = z0; zz < z0 + LEN; zz += 4) for (let k = 0; k < 5; k++) { const sz = 0.4 + rnd() * 1.2; CL.box((rnd() - 0.5) * 360, -60 + rnd() * 150, zz + rnd() * 4, sz, sz, sz, jit(ch([0xdfeaff, 0x9ab8e8, 0x6a7aa8]), 0.06), rnd() * 3); }
+      for (let zz = z0 + 20; zz < z0 + LEN; zz += 45) { const s = rnd() < 0.5 ? -1 : 1, u = s * (40 + rnd() * 90), y = -20 + rnd() * 70, z = zz + rnd() * 20, tl = 24 + rnd() * 26; CL.box(u, y, z, 3.2, 3.2, 3.2, rgb(0xeaf4ff), rnd()); CL.box(u + s * (tl / 2 + 2), y, z, tl, 1.4, 1.4, rgb(0x9ac8ff)); CL.box(u + s * (tl / 2 + 6), y, z, tl * 0.8, 0.7, 0.7, rgb(0x5a8ae0)); }
+      CL.box(par * 70, 44, z0 + 280, 5, 5, 5, rgb(0xfff4d0), 0.4); }
+    else if (w === 10) { /* Fremder Stern: glühender Riese mit Korona */
+      const r = 95, u = U0(r) * 0.9, y = Y0() + 15, z = ZP() + 20; orb(u, y, z, r, [0xffe060, 0xffb030, 0xff8a20, 0xff6a18, 0xffb030, 0xffd050, 0xff7a20, 0xffa030, 0xffe060], 11);
+      for (let k = 0; k < 16; k++) { const a = rnd() * TAU, rr = r * (1.04 + rnd() * 0.2), sz = 5 + rnd() * 8; CL.box(u + Math.cos(a) * rr, y + Math.sin(a) * rr, z - r * 0.35, sz, sz, sz, rgb(ch([0xff8a20, 0xffb030, 0xff5a10])), rnd()); } }
+    else if (w === 11) { /* Milchstraße: leuchtendes Sternenband mit Staubwolken */
+      const zb = z0 + LEN + 220, ph = rnd() * 2;
+      for (let k = 0; k < 190; k++) { const t = rnd(), x = (t - 0.5) * 520, y = 70 + 36 * Math.sin(t * Math.PI + ph) + (rnd() - 0.5) * 26, sz = 0.8 + rnd() * 2.2; CL.box(x, y, zb + (rnd() - 0.5) * 20, sz, sz, sz, jit(ch([0xffffff, 0xffe9b0, 0x9ac8ff, 0xffb0e8, 0xc8b0ff]), 0.05), rnd()); }
+      for (let k = 0; k < 14; k++) { const t = rnd(), x = (t - 0.5) * 460, y = 62 + 34 * Math.sin(t * Math.PI + ph) + (rnd() - 0.5) * 22; CL.box(x, y, zb + 12, 12 + rnd() * 18, 5 + rnd() * 6, 4, jit(ch([0x6a3a9a, 0xa04a9a, 0x3a5a9a]), 0.08)); } }
+    else if (w === 12) { /* Andromeda: Spiralgalaxie direkt voraus */
+      const cx = par * 60, cy = 70, cz = z0 + LEN + 230;
+      for (let arm = 0; arm < 2; arm++) for (let t = 0; t < 78; t++) { const a = t * 0.2 + arm * Math.PI, r = 8 + t * 1.5, sz = 2 + rnd() * 2.6, col = r < 22 ? ch([0xffe8b0, 0xfff4d0]) : r < 70 ? ch([0xb8d8ff, 0x9ac8ff, 0xffffff]) : ch([0x8a7aff, 0x6a8aff]);
+        CL.box(cx + Math.cos(a) * r, cy + Math.sin(a) * r * 0.62, cz + (rnd() - 0.5) * 3, sz, sz, sz, jit(col, 0.06), rnd()); }
+      CL.box(cx, cy, cz, 16, 10, 4, rgb(0xfff4d0)); }
+    else { /* Rand des Universums: kosmisches Netz; im letzten Level das Zieltor */
+      for (let k = 0; k < 26; k++) { const x = (rnd() - 0.5) * 400, y = -50 + rnd() * 140, z = z0 + rnd() * LEN, c = ch([0xffffff, 0xb8a0ff, 0xff9ae8]); if (rnd() < 0.5) CL.box(x, y, z, 40 + rnd() * 60, 0.5, 0.5, rgb(c)); else CL.box(x, y, z, 0.5, 30 + rnd() * 50, 0.5, rgb(c)); }
+      if (fin) { ringV(0, 34, z0 + LEN + 170, 52, 6, 0xffffff, 36); ringV(0, 34, z0 + LEN + 170, 44, 5, 0xff5ad8, 32); CL.box(0, 34, z0 + LEN + 171, 80, 80, 1.5, rgb(0xfff0ff)); } }
   }
   /* --- Boost-Pads & Sprung-Pads --- */
   for (const b of lv.boosts) { const m = new THREE.Mesh(boostGeo, boostMat), th = terrainH(L, b.u, b.z), w0 = WL(b.u, 0.06 + (th > 0 ? th : 0), b.z); m.position.set(w0[0], w0[1], w0[2]); m.rotation.y = w0[3]; grp.add(m); }
@@ -846,13 +906,13 @@ function buildLevel(L) {
   const oc = W.oc;
   /* --- Hindernisse: thematisch je Welt (Rezepte in Anteilen der Kollisionsbox: [x, y, z, sx, sy, sz, Farbe, leuchtet]) --- */
   const drawRec = (rec, o, yb) => { for (const p of rec) { const B = p[7] ? GL : D; B.box(o.u + p[0] * o.hu, yb + p[1] * o.top, o.z + p[2] * o.hz, Math.max(0.12, p[3] * 2 * o.hu), Math.max(0.06, p[4] * o.top), Math.max(0.1, p[5] * 2 * o.hz), p[7] ? rgb(p[6]) : jit(p[6], 0.06)); } };
-  for (const o of lv.obs) { if (o.nodraw) continue; const th = terrainH(L, o.u, o.z), yb = th === -Infinity ? 0 : th, set = OBR[lv.w]; drawRec(set[o.k] || set[0], o, yb); }
+  for (const o of lv.obs) { if (o.nodraw) continue; const th = terrainH(L, o.u, o.z), yb = th === -Infinity ? 0 : th, set = OBR[obrIdx(lv)]; drawRec(set[o.k] || set[0], o, yb); }
   /* --- bewegte Hindernisse: Fass/Felsen/Schneeball rollen, Krokodile, Boote, Gabelstapler, Roboter, Dämonen gleiten --- */
   const LM = c => { const m = new THREE.MeshLambertMaterial({ color: c }); disposables.push(m); return m; }, BM = c => { const m = new THREE.MeshBasicMaterial({ color: c }); disposables.push(m); return m; };
   const part = (geo, mat, x, y, z, par) => { const me = new THREE.Mesh(geo, mat); me.position.set(x, y, z); me.castShadow = true; par.add(me); disposables.push(geo); return me; };
   const pbox = (par, sx, sy, sz, c, x, y, z, basic) => part(new THREE.BoxGeometry(sx, sy, sz), basic ? BM(c) : LM(c), x, y, z, par);
   const mkMover = m => {
-    const g = new THREE.Group(), T = m.top, hu = m.hu, hz = m.hz, MT = MVT[lv.w], q = { g, rot: null, r: 1, flip: false };
+    const g = new THREE.Group(), T = m.top, hu = m.hu, hz = m.hz, MT = mvOf(lv), q = { g, rot: null, r: 1, flip: false };
     if (MT.kind === 'barrel') { const r = T / 2, rot = new THREE.Group(); rot.position.y = r; g.add(rot); q.rot = rot; q.r = r;
       part(new THREE.CylinderGeometry(r, r, hz * 2, 10), LM(0x9a5a2a), 0, 0, 0, rot).rotation.x = Math.PI / 2;
       for (const s of [-1, 1]) part(new THREE.CylinderGeometry(r * 1.05, r * 1.05, 0.14, 10), LM(0x3a3a44), 0, 0, s * hz * 0.6, rot).rotation.x = Math.PI / 2;
@@ -885,6 +945,36 @@ function buildLevel(L) {
       for (const sd of [-1, 1]) { pbox(pg, 0.14, 0.2, 0.08, 0x2a1a10, sd * hu * 0.3, T * 0.42, -hz * 0.87, true); pbox(pg, 0.22, 0.12, 0.06, 0xff9ab8, sd * hu * 0.55, T * 0.32, -hz * 0.87, true); }
       pbox(pg, hu * 0.3, 0.08, 0.08, 0x2a1a10, 0, T * 0.3, -hz * 0.87, true);
       q.tick = t => { const w = Math.sin(t * 6); pg.scale.set(1 + 0.06 * w, 1 - 0.08 * w, 1 + 0.06 * w); }; }
+    else if (MT.kind === 'rover') { q.flip = true; /* unbemannter Mond-Rover */
+      pbox(g, hu * 1.5, T * 0.4, hz * 1.7, MT.c, 0, T * 0.42, 0); pbox(g, hu * 0.9, T * 0.25, hz * 1.3, MT.c2, -hu * 0.1, T * 0.7, 0); pbox(g, 0.1, T * 0.5, 0.1, 0x2a2a30, hu * 0.55, T * 0.9, hz * 0.5); pbox(g, 0.4, 0.25, 0.3, 0x2a2a30, hu * 0.55, T * 1.15, hz * 0.5);
+      pbox(g, 0.2, 0.2, 0.2, 0x35e0ff, hu * 0.75, T * 0.55, 0, true); pbox(g, hu * 1.4, 0.06, hz * 1.2, 0x1d3d86, -hu * 0.15, T * 0.9, 0);
+      for (const x of [-hu * 0.65, 0, hu * 0.65]) for (const s of [-1, 1]) pbox(g, 0.55, 0.55, 0.3, 0x15151a, x, 0.28, s * hz * 0.95); }
+    else if (MT.kind === 'drone') { const rot = new THREE.Group(); rot.position.y = T * 0.92; g.add(rot); /* Marsdrohne mit Rotoren */
+      pbox(g, hu * 0.9, T * 0.3, hz * 0.9, MT.c, 0, T * 0.55, 0); pbox(g, 0.22, 0.22, 0.22, 0xffffff, hu * 0.42, T * 0.55, 0, true); pbox(g, 0.1, T * 0.2, 0.1, 0x2a2a30, 0, T * 0.78, 0);
+      for (const sx of [-1, 1]) for (const sz of [-1, 1]) { pbox(g, 0.12, T * 0.5, 0.12, 0x2a2a30, sx * hu * 0.55, T * 0.25, sz * hz * 0.55); pbox(rot, hu * 0.7, 0.06, 0.16, MT.c2, sx * hu * 0.55, 0, sz * hz * 0.55); pbox(rot, 0.16, 0.06, hz * 0.7, MT.c2, sx * hu * 0.55, 0, sz * hz * 0.55); }
+      q.tick = t => { rot.rotation.y = t * 26; }; }
+    else if (MT.kind === 'satellite') { const pg = new THREE.Group(); g.add(pg); /* Raumsonde mit Solarflügeln */
+      pbox(pg, hu * 0.7, T * 0.5, hz * 1.1, MT.c, 0, T * 0.55, 0); pbox(pg, hu * 0.75, 0.12, hz * 1.15, 0x2a2a30, 0, T * 0.8, 0); for (const s of [-1, 1]) { pbox(pg, hu * 0.55, 0.08, hz * 1.7, MT.c2, s * hu * 0.78, T * 0.6, 0); pbox(pg, hu * 0.2, 0.1, 0.1, 0x9aa0aa, s * hu * 0.4, T * 0.6, 0); }
+      pbox(pg, 0.1, T * 0.3, 0.1, 0x9aa0aa, 0, T * 0.95, 0); pbox(pg, hu * 0.4, 0.1, hz * 0.6, 0xe8ecf4, 0, T * 1.12, 0); pbox(pg, 0.16, 0.16, 0.16, 0xff3a3a, 0, T * 0.82, hz * 0.55, true);
+      for (const s of [-1, 1]) pbox(g, 0.12, T * 0.3, 0.12, 0x5a5f68, s * hu * 0.25, T * 0.15, 0);
+      q.tick = t => { pg.rotation.y = Math.sin(t * 1.3) * 0.25; }; }
+    else if (MT.kind === 'ufo') { const pg = new THREE.Group(); g.add(pg); /* fliegende Untertasse */
+      pbox(pg, hu * 1.8, T * 0.2, hz * 1.8, MT.c, 0, T * 0.55, 0); pbox(pg, hu * 1.2, T * 0.2, hz * 1.2, MT.c2, 0, T * 0.4, 0); pbox(pg, hu * 0.8, T * 0.3, hz * 0.8, 0x8affea, 0, T * 0.78, 0, true);
+      for (let k = 0; k < 6; k++) { const a = k * 1.047; pbox(pg, 0.17, 0.17, 0.17, k & 1 ? 0xffe14a : 0xff6ad8, Math.cos(a) * hu * 0.82, T * 0.56, Math.sin(a) * hz * 0.82, true); }
+      pbox(g, hu * 0.45, T * 0.3, hz * 0.45, 0x7affc0, 0, T * 0.15, 0, true);
+      q.tick = t => { pg.position.y = Math.sin(t * 4) * 0.12; pg.rotation.y = t * 1.5; }; }
+    else if (MT.kind === 'comet') { q.flip = true; /* Komet mit Schweif (fliegt mit dem Kopf voran) */
+      pbox(g, hu * 0.8, T * 0.7, hz * 1.5, MT.c, hu * 0.55, T * 0.5, 0); pbox(g, hu * 0.5, T * 0.5, hz * 1.1, MT.c2, hu * 0.78, T * 0.5, 0, true);
+      pbox(g, hu * 1.1, T * 0.4, hz * 0.9, MT.c2, -hu * 0.35, T * 0.45, 0, true); pbox(g, hu * 0.9, T * 0.22, hz * 0.55, 0xffffff, -hu * 0.85, T * 0.4, 0, true); pbox(g, hu * 0.5, T * 0.1, hz * 0.3, MT.c2, -hu * 1.3, T * 0.38, 0, true); }
+    else if (MT.kind === 'alien') { const pg = new THREE.Group(); g.add(pg); /* Alien-Blob mit Fühlern */
+      pbox(pg, hu * 1.3, T * 0.55, hz * 1.5, MT.c, 0, T * 0.4, 0); pbox(pg, hu * 0.9, T * 0.4, hz * 1.1, MT.c, hu * 0.12, T * 0.78, 0);
+      for (const s of [-1, 1]) { pbox(pg, 0.24, 0.3, 0.2, 0xffffff, hu * 0.58, T * 0.8, s * hz * 0.32, true); pbox(pg, 0.12, 0.16, 0.1, 0x1a0a08, hu * 0.7, T * 0.8, s * hz * 0.32); pbox(pg, 0.08, T * 0.3, 0.08, MT.c2, hu * 0.1, T * 1.1, s * hz * 0.28); pbox(pg, 0.18, 0.18, 0.18, MT.c2, hu * 0.1, T * 1.28, s * hz * 0.28, true); }
+      for (const x of [-hu * 0.4, hu * 0.4]) for (const s of [-1, 1]) pbox(g, 0.22, T * 0.3, 0.22, MT.c2, x, T * 0.15, s * hz * 0.6);
+      q.tick = t => { const w = Math.sin(t * 6); pg.scale.set(1 + 0.06 * w, 1 - 0.08 * w, 1 + 0.06 * w); }; }
+    else if (MT.kind === 'balloon') { const pg = new THREE.Group(); g.add(pg); /* Heißluftballon */
+      pbox(pg, hu * 1.6, T * 0.5, hz * 1.6, MT.c, 0, T * 0.72, 0); pbox(pg, hu * 1.2, T * 0.2, hz * 1.2, MT.c2, 0, T * 1.02, 0); pbox(pg, hu * 1.62, T * 0.1, hz * 1.62, MT.c2, 0, T * 0.72, 0); pbox(pg, hu * 0.7, T * 0.18, hz * 0.7, 0x7a4a22, 0, T * 0.14, 0);
+      for (const sx of [-1, 1]) for (const sz of [-1, 1]) pbox(pg, 0.05, T * 0.3, 0.05, 0x3a2a1a, sx * hu * 0.3, T * 0.32, sz * hz * 0.3);
+      q.tick = t => { pg.position.y = Math.sin(t * 2.2) * 0.1; }; }
     else { q.flip = true; /* demon */
       pbox(g, hu * 1.3, T * 0.55, hz * 1.8, 0x5a1a14, 0, T * 0.4, 0); pbox(g, hu * 0.7, T * 0.36, hz * 1.3, 0x7a2a1a, hu * 0.45, T * 0.8, 0); for (const s of [-1, 1]) { pbox(g, 0.14, T * 0.24, 0.14, 0xe8d8b0, hu * 0.5, T * 1.05, s * hz * 0.5); pbox(g, 0.16, 0.14, 0.14, 0xff9a1a, hu * 0.82, T * 0.85, s * hz * 0.35, true); pbox(g, hu * 0.28, T * 0.5, 0.35, 0x5a1a14, -hu * 0.1, T * 0.35, s * hz * 1.0); }
       pbox(g, hu * 0.6, 0.16, 0.5, 0xff5a10, hu * 0.7, T * 0.62, 0, true); pbox(g, hu * 0.5, 0.2, 0.2, 0x3a0a0a, -hu * 0.8, T * 0.2, 0); }
@@ -903,7 +993,7 @@ function buildLevel(L) {
     else if (m.kind === 'laser') { for (const s of [-1, 1]) { pbox(g, 0.5, T + 0.6, 0.5, 0x2a2650, s * (hu + 0.3), (T + 0.6) / 2, 0); pbox(g, 0.34, 0.34, 0.34, 0xff2a5a, s * (hu + 0.3), T * 0.62, 0, true); }
       const beam = pbox(g, hu * 2, 0.32, 0.32, 0xff2a5a, 0, T * 0.62, 0, true); beam.visible = false; const beam2 = pbox(g, hu * 2, 0.1, 0.1, 0xffe0e8, 0, T * 0.62, 0, true); beam2.visible = false;
       q.tick = (on, tele, t) => { beam.visible = beam2.visible = on || (tele && Math.floor(t * 14) % 2 === 0); beam.scale.y = beam.scale.z = on ? 1 : 0.35; }; }
-    else if (m.kind === 'geyser') { const col = pbox(g, hu * 1.8, 1, hu * 1.8, WORLDS[lv.w].tmc, 0, 0.5, 0, true); pbox(g, hu * 2.1, 0.35, hu * 2.1, WORLDS[lv.w].tmb || 0x5a5f68, 0, 0.17, 0); pbox(g, hu * 1.7, 0.1, hu * 1.7, WORLDS[lv.w].tmi || 0x2a6ac0, 0, 0.36, 0, true); let h = 0.4;
+    else if (m.kind === 'geyser') { const col = pbox(g, hu * 1.8, 1, hu * 1.8, TH(lv).tmc, 0, 0.5, 0, true); pbox(g, hu * 2.1, 0.35, hu * 2.1, TH(lv).tmb || 0x5a5f68, 0, 0.17, 0); pbox(g, hu * 1.7, 0.1, hu * 1.7, TH(lv).tmi || 0x2a6ac0, 0, 0.36, 0, true); let h = 0.4;
       q.tick = (on, tele, t, dt) => { const th = on ? T : tele ? 0.5 + 0.4 * Math.abs(Math.sin(t * 18)) : 0.25; h += (th - h) * Math.min(1, dt * (on ? 18 : 6)); col.scale.y = h; col.position.y = 0.3 + h / 2; col.scale.x = col.scale.z = on ? 1 : 0.55; }; }
     else { const f1 = pbox(g, hu * 1.8, 1, hu * 1.8, 0xff6a10, 0, 0.5, 0, true), f2 = pbox(g, hu * 1.1, 1, hu * 1.1, 0xffd040, 0, 0.5, 0, true); pbox(g, hu * 2.1, 0.4, hu * 2.1, 0x2c1f24, 0, 0.2, 0); pbox(g, hu * 1.7, 0.1, hu * 1.7, 0xff5a10, 0, 0.42, 0, true); let h = 0.4;
       q.tick = (on, tele, t, dt) => { const th = on ? T * (0.9 + 0.1 * Math.sin(t * 30)) : tele ? 0.6 + 0.4 * Math.abs(Math.sin(t * 18)) : 0.25; h += (th - h) * Math.min(1, dt * (on ? 18 : 6)); f1.scale.y = h; f1.position.y = 0.4 + h / 2; f2.scale.y = h * 0.8; f2.position.y = 0.4 + h * 0.4; }; }
@@ -923,7 +1013,7 @@ function buildLevel(L) {
     GL.box(0, 0.06, z0 + LEN - 18, 10, 0.05, 6, rgb(0xffd23f));
     for (let k = 0; k < 4; k++) { GL.box(-5, 5.2, z0 + LEN - 27 + k * 6, 1.2, 0.2, 1.2, rgb(0xfff2a0)); GL.box(5, 5.2, z0 + LEN - 27 + k * 6, 1.2, 0.2, 1.2, rgb(0xfff2a0)); }
     for (const s of [-1, 1]) { for (let k = 0; k < 3; k++) D.box(s * 6.6, 0.45 + k * 0.9, z0 + LEN - 26, 1.4, 0.8, 1.4, rgb(0x222228), k * 0.4); D.box(s * 6.6, 1.0, z0 + LEN - 12, 1.6, 2, 1.2, rgb(0xd0342c)); D.box(s * 6.6, 2.15, z0 + LEN - 12, 1.7, 0.3, 1.3, rgb(0x999ca4)); }
-    const wsTex = signTex('WERKSTATT', 'CHECKPOINT', '#c8433a', '#ffffff'); disposables.push(wsTex);
+    const wsTex = signTex('HANGAR', 'CHECKPOINT', '#c8433a', '#ffffff'); disposables.push(wsTex);
     const ws = new THREE.Mesh(new THREE.PlaneGeometry(14, 3.5), new THREE.MeshBasicMaterial({ map: wsTex })), wp = WL(0, 7.9, zh0 - 1.2); ws.position.set(wp[0], wp[1], wp[2]); ws.rotation.y = wp[3] + Math.PI; grp.add(ws); disposables.push(ws.geometry, ws.material);
     D.box(-4, 7.2, zh0 - 1.2, 0.5, 2.6, 0.5, dark); D.box(4, 7.2, zh0 - 1.2, 0.5, 2.6, 0.5, dark);
   } else {
@@ -931,7 +1021,7 @@ function buildLevel(L) {
     for (let r = 0; r < 3; r++) for (let c = -9; c < 9; c++) D.box(c + 0.5, 0.045, zf + r + 0.5, 1, 0.05, 1, rgb(W2[(c + r + 18) & 1]));
     for (const s2 of [-1, 1]) for (let k = 0; k < 9; k++) D.box(s2 * 9.8, 0.5 + k, zf, 1.1, 1, 1.1, rgb(k & 1 ? 0xffffff : 0xd63a3a));
     D.box(0, 9.6, zf, 21.4, 1.2, 1.4, rgb(0x14161c)); for (let c = -10; c < 10; c++) D.box(c + 0.5, 10.4, zf, 1, 0.5, 1.5, rgb(W2[(c + 20) & 1]));
-    const finTex = signTex('ZIEL', 'MOND', '#ffffff', '#14161c'); disposables.push(finTex);
+    const finTex = signTex('ZIEL', 'RAND DES UNIVERSUMS', '#ffffff', '#14161c'); disposables.push(finTex);
     const fin = new THREE.Mesh(new THREE.PlaneGeometry(16, 4), new THREE.MeshBasicMaterial({ map: finTex })), fp = WL(0, 7.4, zf - 0.8); fin.position.set(fp[0], fp[1], fp[2]); fin.rotation.y = fp[3] + Math.PI; grp.add(fin); disposables.push(fin.geometry, fin.material);
     const fc = [0xff4d4d, 0xffd23f, 0x4cc2ff, 0x34d399];
     for (let zz = z0 + LEN - 50; zz < zf - 4; zz += 6) for (const s2 of [-1, 1]) { D.box(s2 * 9.1, 2.5, zz, 0.2, 5, 0.2, rgb(0xdddddd)); D.box(s2 * 9.1, 4.6, zz + 0.7, 0.1, 0.8, 1.4, rgb(fc[Math.floor(zz / 6) & 3])); }
@@ -965,26 +1055,39 @@ const bodyMat = carMat(0xe63946), darkMat = carMat(0x1c1c24), glassMat = carMat(
 const headMat = new THREE.MeshBasicMaterial({ color: 0xfff2a0 }), tailMat = new THREE.MeshBasicMaterial({ color: 0xff2a2a }), tireMat = carMat(0x18181c);
 const mbox = (w, h, d, mat, x, y, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); m.castShadow = true; tilt.add(m); return m; };
 const lights = (y, zf, zb, x = 0.6) => { mbox(0.42, 0.2, 0.08, headMat, x, y, zf); mbox(0.42, 0.2, 0.08, headMat, -x, y, zf); mbox(0.42, 0.2, 0.08, tailMat, x, y + 0.05, zb); mbox(0.42, 0.2, 0.08, tailMat, -x, y + 0.05, zb); };
-// Karosserien (alle Boxen, Ursprung = Boden zwischen den Rädern, vorne = +z)
+const accMat = carMat(0xdfe6f2), solarMat = carMat(0x1d3d86), glowC = new THREE.MeshBasicMaterial({ color: 0x5fe8ff }), glowO = new THREE.MeshBasicMaterial({ color: 0xff8a2a }), glowG = new THREE.MeshBasicMaterial({ color: 0x7affc0 });
+const mboxR = (w, h, d, mat, x, y, z, ry) => { const m = mbox(w, h, d, mat, x, y, z); m.rotation.y = ry; return m; };
+// Karosserien (alle Boxen, Ursprung = Boden zwischen den Rädern, vorne = +z). Coupé (Standard) und Formel sind unverändert.
 const BODIES = [
   () => { mbox(2.0, 0.62, 4.0, bodyMat, 0, 0.78, 0); mbox(1.9, 0.28, 1.5, bodyMat, 0, 1.05, 1.15); mbox(1.62, 0.62, 1.9, glassMat, 0, 1.35, -0.35); mbox(1.7, 0.1, 1.7, bodyMat, 0, 1.7, -0.35);
     mbox(2.02, 0.2, 4.05, darkMat, 0, 0.5, 0); mbox(2.0, 0.1, 0.55, bodyMat, 0, 1.55, -1.9); mbox(0.12, 0.4, 0.12, darkMat, 0.7, 1.35, -1.9); mbox(0.12, 0.4, 0.12, darkMat, -0.7, 1.35, -1.9); lights(0.85, 2.02, -2.02); },
-  () => { mbox(1.9, 0.75, 3.2, bodyMat, 0, 0.85, 0); mbox(1.7, 0.85, 2.0, glassMat, 0, 1.6, -0.25); mbox(1.75, 0.1, 1.9, bodyMat, 0, 2.08, -0.25); mbox(1.92, 0.2, 3.25, darkMat, 0, 0.5, 0); lights(0.95, 1.62, -1.62, 0.55); },
-  () => { mbox(1.7, 0.22, 3.6, darkMat, 0, 0.75, 0); mbox(1.4, 0.5, 1.2, bodyMat, 0, 0.95, 1.5); mbox(1.3, 0.6, 0.9, bodyMat, 0, 1.0, -1.5); mbox(0.9, 0.3, 0.8, darkMat, 0, 1.0, 0.2);
-    for (const [x, z] of [[0.75, 0.7], [-0.75, 0.7], [0.75, -0.8], [-0.75, -0.8]]) mbox(0.12, 1.1, 0.12, darkMat, x, 1.4, z); mbox(1.7, 0.12, 1.7, darkMat, 0, 1.98, -0.05); mbox(0.5, 0.15, 0.4, bodyMat, 0, 1.1, 0.3); lights(1.0, 2.1, -1.95, 0.5); },
-  () => { mbox(1.9, 0.2, 4.4, darkMat, 0, 0.55, 0); mbox(1.95, 0.55, 1.5, bodyMat, 0, 0.9, 1.3); mbox(1.9, 0.5, 1.5, bodyMat, 0, 0.95, -0.15); mbox(1.92, 0.5, 1.3, glassMat, 0, 1.45, -0.15); mbox(1.9, 0.12, 1.55, bodyMat, 0, 1.76, -0.15);
-    for (const [x, z] of [[0.92, 0.5], [-0.92, 0.5], [0.92, -0.8], [-0.92, -0.8]]) mbox(0.12, 0.52, 0.12, bodyMat, x, 1.45, z); mbox(1.9, 0.14, 1.7, bodyMat, 0, 0.72, -1.65); mbox(0.1, 0.45, 1.7, bodyMat, 0.9, 1.0, -1.65); mbox(0.1, 0.45, 1.7, bodyMat, -0.9, 1.0, -1.65);
-    mbox(1.9, 0.45, 0.1, bodyMat, 0, 1.0, -2.5); mbox(1.9, 0.45, 0.1, bodyMat, 0, 1.0, -0.85); mbox(1.6, 0.05, 1.5, darkMat, 0, 0.8, -1.65); lights(0.85, 2.06, -2.52); },
-  () => { mbox(2.1, 0.6, 4.4, bodyMat, 0, 0.8, 0); mbox(1.5, 0.15, 1.6, darkMat, 0, 1.15, 1.3); mbox(1.6, 0.5, 1.7, glassMat, 0, 1.3, -0.45); mbox(1.6, 0.1, 1.5, bodyMat, 0, 1.58, -0.45);
-    mbox(0.35, 0.05, 4.4, darkMat, 0.4, 1.12, 0); mbox(0.35, 0.05, 4.4, darkMat, -0.4, 1.12, 0); mbox(2.1, 0.1, 0.5, bodyMat, 0, 1.35, -2.1); mbox(0.12, 0.35, 0.12, darkMat, 0.8, 1.2, -2.1); mbox(0.12, 0.35, 0.12, darkMat, -0.8, 1.2, -2.1); mbox(2.12, 0.2, 4.5, darkMat, 0, 0.5, 0); lights(0.85, 2.22, -2.22); },
-  () => { mbox(2.0, 0.7, 3.6, bodyMat, 0, 0.85, 0); mbox(1.9, 0.3, 1.2, bodyMat, 0, 1.1, 1.2); mbox(1.7, 0.7, 2.0, glassMat, 0, 1.5, -0.3); mbox(1.7, 0.1, 1.9, bodyMat, 0, 1.9, -0.3); mbox(0.6, 0.25, 0.7, darkMat, 0, 2.05, -0.1);
-    mbox(2.2, 0.08, 0.6, bodyMat, 0, 1.75, -1.85); mbox(0.12, 0.45, 0.12, darkMat, 0.8, 1.5, -1.85); mbox(0.12, 0.45, 0.12, darkMat, -0.8, 1.5, -1.85); mbox(1.9, 0.14, 0.14, headMat, 0, 0.95, 1.85); mbox(2.02, 0.2, 3.65, darkMat, 0, 0.5, 0); lights(0.9, 1.82, -1.82); },
+  /* 1 Shuttle-Kart: kompakte Raumkapsel auf Rädern */
+  () => { mbox(1.9, 0.7, 3.1, bodyMat, 0, 0.85, 0); mbox(1.5, 0.5, 1.3, glassMat, 0, 1.45, 0.55); mbox(1.55, 0.1, 1.35, accMat, 0, 1.75, 0.55); mbox(1.3, 0.45, 1.0, bodyMat, 0, 1.4, -0.85);
+    mbox(0.12, 0.7, 0.9, bodyMat, 0.7, 1.55, -1.3); mbox(0.12, 0.7, 0.9, bodyMat, -0.7, 1.55, -1.3); mbox(0.9, 0.35, 0.28, glowC, 0, 0.9, -1.58); mbox(1.92, 0.2, 3.15, darkMat, 0, 0.5, 0); mbox(0.4, 0.14, 0.9, accMat, 0, 1.0, 1.0); lights(0.95, 1.57, -1.6, 0.55); },
+  /* 2 Mond-Buggy: offenes Gestell mit Funkschüssel */
+  () => { mbox(1.5, 0.2, 3.6, darkMat, 0, 0.75, 0); mbox(1.3, 0.45, 1.1, bodyMat, 0, 0.95, 1.5); mbox(0.5, 0.55, 0.45, accMat, 0.4, 1.3, 0.0); mbox(0.5, 0.55, 0.45, accMat, -0.4, 1.3, 0.0);
+    for (const [x, z] of [[0.75, 0.75], [-0.75, 0.75], [0.75, -0.9], [-0.75, -0.9]]) mbox(0.1, 1.1, 0.1, accMat, x, 1.35, z); mbox(1.7, 0.1, 1.9, accMat, 0, 1.92, -0.1);
+    mbox(1.3, 0.5, 0.9, bodyMat, 0, 0.98, -1.5); mbox(0.1, 0.9, 0.1, darkMat, 0.5, 1.7, -1.55); mbox(0.85, 0.1, 0.85, accMat, 0.5, 2.2, -1.55); mbox(0.1, 0.35, 0.1, darkMat, 0.5, 2.05, -1.55); mbox(0.06, 0.8, 0.06, darkMat, -0.6, 1.9, 0.75); mbox(0.4, 0.25, 0.04, tailMat, -0.8, 2.15, 0.75); lights(1.0, 2.15, -2.1, 0.5); },
+  /* 3 Mars-Rover: Solarpanel, Kameramast und Greifarm */
+  () => { mbox(1.8, 0.6, 3.4, bodyMat, 0, 0.95, 0); mbox(1.6, 0.2, 1.2, accMat, 0, 1.35, 1.0); mbox(2.4, 0.06, 1.5, solarMat, 0, 1.45, -0.8); mbox(0.14, 0.9, 0.14, darkMat, 0.6, 1.75, 0.9); mbox(0.5, 0.26, 0.3, accMat, 0.6, 2.3, 0.9); mbox(0.12, 0.12, 0.12, glowC, 0.6, 2.3, 1.08);
+    mbox(0.14, 0.14, 1.0, darkMat, -0.5, 1.0, 2.2); mbox(0.3, 0.3, 0.2, accMat, -0.5, 1.0, 2.75); mbox(0.7, 0.5, 0.7, darkMat, 0, 1.05, -1.75); mbox(1.82, 0.2, 3.45, darkMat, 0, 0.5, 0); lights(0.95, 1.72, -1.72, 0.6); },
+  /* 4 Raketenschlitten: langer Rumpf mit Triebwerksdüse */
+  () => { mbox(1.7, 0.5, 4.2, bodyMat, 0, 0.75, 0); mbox(1.2, 0.4, 1.0, bodyMat, 0, 0.7, 2.6); mbox(0.6, 0.3, 0.7, accMat, 0, 0.7, 3.25); mbox(0.8, 0.35, 1.3, glassMat, 0, 1.15, 0.5);
+    mbox(1.4, 0.8, 1.0, darkMat, 0, 0.85, -2.4); mbox(0.95, 0.6, 0.18, glowO, 0, 0.85, -3.0); mbox(0.6, 0.38, 0.1, glowC, 0, 0.85, -3.1);
+    for (const s of [-1, 1]) { mbox(0.12, 0.9, 0.9, bodyMat, s * 0.85, 1.2, -2.0); mbox(0.5, 0.1, 1.1, accMat, s * 1.05, 0.8, 1.9); } mbox(1.72, 0.14, 4.25, darkMat, 0, 0.5, 0); lights(0.8, 3.12, -2.95, 0.4); },
+  /* 5 Ufo-Gleiter: Untertasse auf Rädern */
+  () => { mboxR(2.5, 0.28, 2.5, bodyMat, 0, 0.92, 0, 0.785); mbox(2.5, 0.28, 2.5, bodyMat, 0, 0.92, 0); mboxR(1.8, 0.3, 1.8, darkMat, 0, 0.62, 0, 0.785); mbox(1.8, 0.3, 1.8, darkMat, 0, 0.62, 0);
+    mboxR(1.25, 0.5, 1.25, glassMat, 0, 1.3, -0.1, 0.785); mbox(1.2, 0.5, 1.2, glassMat, 0, 1.3, -0.1); mbox(0.2, 0.25, 0.2, glowG, 0, 1.7, -0.1);
+    for (let k = 0; k < 8; k++) { const a = k * 0.785 + 0.39; mbox(0.2, 0.12, 0.2, k & 1 ? glowG : glowC, Math.sin(a) * 1.28, 0.95, Math.cos(a) * 1.28); } lights(0.9, 1.27, -1.27, 0.5); },
   () => { mbox(0.95, 0.45, 3.6, bodyMat, 0, 0.6, 0); mbox(0.55, 0.3, 1.0, bodyMat, 0, 0.55, 1.85); mbox(0.7, 0.4, 0.8, darkMat, 0, 0.95, 0.1); mbox(0.5, 0.25, 0.6, glassMat, 0, 1.2, 0.0); mbox(2.2, 0.08, 0.55, bodyMat, 0, 0.35, 2.35);
     mbox(1.9, 0.1, 0.55, bodyMat, 0, 1.25, -1.85); mbox(0.1, 0.6, 0.1, darkMat, 0.6, 0.95, -1.9); mbox(0.1, 0.6, 0.1, darkMat, -0.6, 0.95, -1.9); mbox(1.4, 0.35, 1.1, bodyMat, 0, 0.7, -0.9); mbox(0.12, 0.12, 0.12, tailMat, 0, 0.8, -2.0); },
-  () => { mbox(2.0, 0.9, 3.6, bodyMat, 0, 2.15, 0); mbox(1.9, 0.4, 1.4, bodyMat, 0, 2.5, 1.1); mbox(1.7, 0.8, 1.7, glassMat, 0, 3.0, -0.3); mbox(1.75, 0.1, 1.75, bodyMat, 0, 3.45, -0.3);
-    mbox(1.6, 0.3, 0.3, darkMat, 0, 1.2, 1.4); mbox(1.6, 0.3, 0.3, darkMat, 0, 1.2, -1.4); mbox(0.3, 0.9, 0.3, darkMat, 0.5, 1.6, 1.4); mbox(0.3, 0.9, 0.3, darkMat, -0.5, 1.6, 1.4); mbox(0.3, 0.9, 0.3, darkMat, 0.5, 1.6, -1.4); mbox(0.3, 0.9, 0.3, darkMat, -0.5, 1.6, -1.4);
-    mbox(2.02, 0.25, 3.7, darkMat, 0, 1.75, 0); lights(2.3, 1.82, -1.82); }
+  /* 7 Orbit-Crawler: hoher Raupenrover mit Solarflügeln und Radarschüssel */
+  () => { mbox(2.0, 0.9, 3.6, bodyMat, 0, 2.15, 0); mbox(1.9, 0.4, 1.4, bodyMat, 0, 2.5, 1.1); mbox(1.7, 0.8, 1.7, glassMat, 0, 3.0, -0.3); mbox(1.75, 0.1, 1.75, accMat, 0, 3.45, -0.3);
+    mbox(1.6, 0.3, 0.3, darkMat, 0, 1.2, 1.4); mbox(1.6, 0.3, 0.3, darkMat, 0, 1.2, -1.4); for (const [x, z] of [[0.5, 1.4], [-0.5, 1.4], [0.5, -1.4], [-0.5, -1.4]]) mbox(0.3, 0.9, 0.3, darkMat, x, 1.6, z);
+    mbox(2.02, 0.25, 3.7, darkMat, 0, 1.75, 0); for (const s of [-1, 1]) { mbox(1.3, 0.06, 2.2, solarMat, s * 1.65, 2.75, -0.3); mbox(0.5, 0.1, 0.1, darkMat, s * 1.05, 2.75, -0.3); }
+    mbox(0.1, 0.7, 0.1, darkMat, 0, 3.8, -1.2); mbox(0.9, 0.1, 0.9, accMat, 0, 4.2, -1.2); mbox(0.2, 0.2, 0.3, glowC, 0, 4.2, -0.7); lights(2.3, 1.82, -1.82); }
 ];
+
 let wheels = []; const rimMats = [];
 function buildCar() {
   while (tilt.children.length) { const c = tilt.children[0]; tilt.remove(c); if (c.geometry) c.geometry.dispose(); }
@@ -1185,7 +1288,7 @@ let simT = 0, camYaw = 0, shake = 0;
 const camPos = new THREE.Vector3(), camLook = new THREE.Vector3(); let camY = 0;
 const worldOf = () => LV[levelAt(car.z)].w;
 
-const RESET_HINT = '<br>F = Werkstatt öffnen';
+const RESET_HINT = '<br>F = Hangar öffnen';
 let resetArmed = false, resetX = 0, resetZ = 0; // F darf nur direkt nach einem Reset genutzt werden, solange das Auto steht
 const armReset = () => { resetArmed = true; resetX = car.x; resetZ = car.z; };
 function openWorkshopAfterReset() {
@@ -1210,7 +1313,7 @@ function destroyCar() {
   flash('rgba(255,120,20,.6)'); respawnCheckpoint(true); armReset();
 }
 function fellInPit() {
-  const w = worldOf(), W = WORLDS[w]; burst(car.x, baseAt(car.z) + PITY + 0.3, car.z, 22, W.pit[0], 12, 0.9, 0.5, 20); Snd.noise(0.4, 0.2); Snd.tone(300, 0.5, 'sine', 0.08, 60); flash(W.flash);
+  const W = TH(LV[levelAt(car.z)]); burst(car.x, baseAt(car.z) + PITY + 0.3, car.z, 22, W.pit[0], 12, 0.9, 0.5, 20); Snd.noise(0.4, 0.2); Snd.tone(300, 0.5, 'sine', 0.08, 60); flash(W.flash);
   respawnCheckpoint(true); armReset();
 }
 function placeCar(x, z, yaw) {
@@ -1252,7 +1355,7 @@ function collideObstacles(dt) {
       if (on && !m.wasOn && car.y < m.by + m.top - 0.3 && Math.abs(car.x - m.u) < m.hu + 0.9 && Math.abs(car.z - m.z) < m.hz + 1.3) { m.wasOn = on; crushCar(); return; } // Presse/Geysir/Feuer/Laser schaltet sich auf dem Auto ein
       if (on) res(m.u, m.z, m.hu, m.hz, m.by + m.top, 0); }
     m.wasOn = on; }
-  for (const m of lv.movers) if (Math.abs(m.z - car.z) < 6) res(m.amp * Math.sin(simT * m.sp + m.ph), m.z, m.hu, m.hz, m.by + m.top, m.amp * m.sp * Math.cos(simT * m.sp + m.ph));
+  for (const m of lv.movers) if (Math.abs(m.z - car.z) < 6) res(m.amp * Math.sin(simT * m.sp + m.ph) + (m.u0 || 0), m.z, m.hu, m.hz, m.by + m.top, m.amp * m.sp * Math.cos(simT * m.sp + m.ph));
 }
 function land(impact, fallH) {
   burst(car.x, car.y + 0.2, car.z, 8, 0xd8c8a0, 5, 0.5, 0.35, 0); car.squash = Math.min(1, impact / 18);
@@ -1270,7 +1373,7 @@ function edgeCheck() {
 }
 function stepCar(dt) {
   if (resetArmed && (Math.abs(car.z - resetZ) > 0.25 || Math.abs(car.x - resetX) > 0.25)) resetArmed = false;
-  simT += dt; const I = readInput(); const psi0 = pathAt(car.z).psi; const lvC = LV[levelAt(car.z)], WC = WORLDS[lvC.w], Gv = lvC.G;
+  simT += dt; const I = readInput(); const psi0 = pathAt(car.z).psi; const lvC = LV[levelAt(car.z)], WC = TH(lvC), Gv = lvC.G;
   car.hitCd = Math.max(0, car.hitCd - dt); car.boostCd = Math.max(0, car.boostCd - dt);
   let sy = Math.sin(car.yaw), cy = Math.cos(car.yaw), fx = sy, fz = cy, rx = -cy, rz = sy;
   let vf = car.vx * fx + car.vz * fz, vl = car.vx * rx + car.vz * rz; const g = car.grounded;
@@ -1333,18 +1436,19 @@ function stepCar(dt) {
   car.safeT -= dt;
   if (car.grounded && car.safeT <= 0) { let ok = car.y - baseAt(car.z) < 4; for (let d = -10; d <= 16 && ok; d += 5) if (groundAt(car.x + fx * d, car.z + fz * d, car.y + 1) === -Infinity) ok = false;
     if (ok) { car.safe.push({ x: car.x, z: car.z, yaw: car.yaw }); if (car.safe.length > 6) car.safe.shift(); car.safeT = 0.25; } }
-  if (L !== car.lvl) { car.lvl = L; toast('Level ' + (L + 1) + ' / ' + NLEV + '<br>' + wlabel(WORLDS[lv.w])); }
+  if (L !== car.lvl) { car.lvl = L; toast('Level ' + (L + 1) + ' / ' + NLEV + '<br>' + wlabel(WORLDS[lv.w]) + ' · ' + gTxt(lv.G)); }
 }
 
 /* =====================================================================
    KAMERA, EFFEKTE, HUD
    ===================================================================== */
-function envAt(z) { let idx = 0; for (let k = 1; k < NW; k++) idx += smooth(k * 20 * LEN - 150, k * 20 * LEN + 150, z); const i = Math.min(NW - 2, Math.floor(idx)), f = idx >= NW - 1 ? 1 : idx - i; return [WORLDS[i], WORLDS[i + 1], f, idx]; }
+const ENVL = [WORLDS[0], ERDE_SKY, ...WORLDS.slice(1)], ENVB = [5, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260].map(n => n * LEN);
+function envAt(z) { let idx = 0; for (const b of ENVB) idx += smooth(b - 150, b + 150, z); const n = ENVL.length, i = Math.min(n - 2, Math.floor(idx)), f = idx >= n - 1 ? 1 : idx - i; return [ENVL[i], ENVL[i + 1], f, idx]; }
 function applyEnv() {
   const [a, b, f, idx] = envAt(car.z), cw = toW(car.x, car.y, car.z);
   scene.background.copy(a.cSky).lerp(b.cSky, f); scene.fog.color.copy(a.cFog).lerp(b.cFog, f); scene.fog.near = lerp(a.fogN, b.fogN, f); scene.fog.far = lerp(a.fogF, b.fogF, f);
   sun.color.copy(a.cSun).lerp(b.cSun, f); sun.intensity = lerp(a.sunI, b.sunI, f); hemi.color.copy(a.cHS).lerp(b.cHS, f); hemi.groundColor.copy(a.cHG).lerp(b.cHG, f); hemi.intensity = lerp(a.hemiI, b.hemiI, f);
-  const hf = clamp(1 - Math.abs(idx - 9), 0, 1); carLight.intensity = hf * 1.4; carLight.position.set(cw[0], cw[1] + 5, cw[2]);
+  const hf = 0; carLight.intensity = hf * 1.4; carLight.position.set(cw[0], cw[1] + 5, cw[2]);
   sun.position.set(cw[0] + lerp(30, 40, hf), cw[1] + lerp(55, 32, hf), cw[2] + lerp(20, -12, hf)); sun.target.position.set(cw[0], cw[1], cw[2]);
   return idx;
 }
@@ -1386,19 +1490,19 @@ function updateVisuals(dt) {
   for (const k in loaded) { const o = loaded[k], lv = LV[k];
     for (const c of lv.coins) if (c.mesh && !c.taken) { c.mesh.rotation.y = simT * 3 + c.ph; c.mesh.position.y = c.y - o.org[1] + Math.sin(simT * 3 + c.ph) * 0.12; }
     for (const f of o.flames) { const s = 1 + 0.4 * Math.sin(simT * 9 + f.ph); f.a.scale.set(1.2, 2.4 * s, 1.2); f.a.position.y = f.y + 1.2 * s; f.b.scale.set(0.7, 1.6 * s, 0.7); f.b.position.y = f.y + 1.9 * s; }
-    lv.movers.forEach((m, i) => { const q = o.moverMeshes[i], u = m.amp * Math.sin(simT * m.sp + m.ph), vel = m.amp * m.sp * Math.cos(simT * m.sp + m.ph), w0 = toWR(u, 0, m.z), g = q.g; g.position.set(w0[0] - o.org[0], w0[1] - o.org[1], w0[2] - o.org[2]); g.rotation.y = w0[3]; if (q.rot) q.rot.rotation.z = -u / q.r; if (q.flip) g.scale.x = vel >= 0 ? 1 : -1; if (q.tick) q.tick(simT); });
-    lv.timed.forEach((m, i) => { const q = o.timedMeshes[i], w0 = toWR(m.u, 0, m.z), p = ((simT / m.per) + m.ph) % 1; q.g.position.set(w0[0] - o.org[0], w0[1] - o.org[1], w0[2] - o.org[2]); q.g.rotation.y = w0[3]; q.tick(p < m.duty, p > 1 - 0.15, simT, dt); }); }
+    lv.movers.forEach((m, i) => { const q = o.moverMeshes[i], u = m.amp * Math.sin(simT * m.sp + m.ph), vel = m.amp * m.sp * Math.cos(simT * m.sp + m.ph), w0 = toWR(u + (m.u0 || 0), m.dy || 0, m.z), g = q.g; g.position.set(w0[0] - o.org[0], w0[1] - o.org[1], w0[2] - o.org[2]); g.rotation.y = w0[3]; if (q.rot) q.rot.rotation.z = -u / q.r; if (q.flip) g.scale.x = vel >= 0 ? 1 : -1; if (q.tick) q.tick(simT); });
+    lv.timed.forEach((m, i) => { const q = o.timedMeshes[i], w0 = toWR(m.u, m.dy || 0, m.z), p = ((simT / m.per) + m.ph) % 1; q.g.position.set(w0[0] - o.org[0], w0[1] - o.org[1], w0[2] - o.org[2]); q.g.rotation.y = w0[3]; q.tick(p < m.duty, p > 1 - 0.15, simT, dt); }); }
   matHaz.color.setScalar(0.85 + 0.15 * Math.sin(simT * 3));
   updateParts(dt);
   if (mode === 'play') {
-    if (car.grounded && spd > 7 && Math.random() < dt * 40) emit(car.x - sy * 1.6 + (Math.random() - 0.5), car.y + 0.2, car.z - cy * 1.6, (Math.random() - 0.5) * 2, 1 + Math.random(), (Math.random() - 0.5) * 2, WORLDS[clamp(Math.round(idx), 0, NW - 1)].dust, 0.5, 0.5, -1);
+    if (car.grounded && spd > 7 && Math.random() < dt * 40) emit(car.x - sy * 1.6 + (Math.random() - 0.5), car.y + 0.2, car.z - cy * 1.6, (Math.random() - 0.5) * 2, 1 + Math.random(), (Math.random() - 0.5) * 2, ENVL[clamp(Math.round(idx), 0, ENVL.length - 1)].dust, 0.5, 0.5, -1);
     if (car.nitroOn) emit(car.x - sy * 2.1, car.y + 0.7, car.z - cy * 2.1, -sy * 6 + (Math.random() - 0.5), 0.5, -cy * 6 + (Math.random() - 0.5), Math.random() < 0.5 ? 0xff8a1f : 0x55e6ff, 0.3, 0.45);
     if (car.hp < S.maxHp * 0.35 && Math.random() < dt * 14) emit(car.x + sy * 1.4, car.y + 1.2, car.z + cy * 1.4, 0, 2.5, 0, 0x303030, 0.9, 0.7);
-    { const wn = WORLDS[clamp(Math.round(idx), 0, NW - 1)], fx = wn.fx; if (fx && Math.random() < dt * fx.rate) emitW(cw[0] + (Math.random() - 0.5) * 40, cw[1] + fx.y0 + Math.random() * fx.yr, cw[2] + (Math.random() - 0.5) * 40, Math.random() - 0.5, fx.vy * (0.7 + Math.random() * 0.6), 0, fx.c, fx.life, fx.size); }
+    { const wn = ENVL[clamp(Math.round(idx), 0, ENVL.length - 1)], fx = wn.fx; if (fx && Math.random() < dt * fx.rate) emitW(cw[0] + (Math.random() - 0.5) * 40, cw[1] + fx.y0 + Math.random() * fx.yr, cw[2] + (Math.random() - 0.5) * 40, Math.random() - 0.5, fx.vy * (0.7 + Math.random() * 0.6), 0, fx.c, fx.life, fx.size); }
     Snd.engine(clamp(spd / (S.maxV * 1.3), 0, 1.4), true);
   } else Snd.engine(0, false);
   const L = levelAt(car.z), lv = LV[L], lz = clamp((car.z - lv.z0) / LEN, 0, 1);
-  setTxt('hLevel', 'Level ' + (L + 1) + ' / ' + NLEV + '<br>' + wlabel(WORLDS[lv.w]) + ' · ' + Math.round(lz * 100) + '%<br><span style="color:#8f9bb3;font-weight:500">Checkpoint: ' + (save.checkpoint < 0 ? 'Start' : 'Werkstatt ' + (save.checkpoint + 1)) + '</span>', true);
+  setTxt('hLevel', 'Level ' + (L + 1) + ' / ' + NLEV + '<br><i class="pd" style="--c:' + TH(lv).ui + '"></i>' + wlabel(WORLDS[lv.w]) + ' · ' + gTxt(lv.G) + ' · ' + Math.round(lz * 100) + '%<br><span class="dm">Checkpoint: ' + (save.checkpoint < 0 ? 'Start' : 'Hangar ' + (save.checkpoint + 1)) + '</span>', true);
   setTxt('hCoins', '<i class="cn"></i> ' + save.coins, true);
   setTxt('hSpeed', Math.round(spd * 3.6) + ' <small>km/h</small>', true);
   { const lab = $('bHp').firstElementChild, tx = 'Haltbarkeit · ' + Math.ceil(car.hp) + ' / ' + S.maxHp; if (hudCache.hpTxt !== tx) { hudCache.hpTxt = tx; lab.textContent = tx; } }
@@ -1434,9 +1538,9 @@ function showFinish() {
   for (let k = 0; k < 8; k++) burst(car.x + (Math.random() - 0.5) * 10, car.y + 5, car.z + 3 + Math.random() * 4, 14, cols[k % cols.length], 16, 1.8, 0.4, 9);
   [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => Snd.tone(f, 0.25, 'square', 0.05), i * 140));
   const upg = Object.values(save.own).reduce((a, b) => a + b, 0), cos = save.ownedPaints.length + save.ownedRims.length + save.ownedRimTypes.length + save.ownedCars.length - 4;
-  showMenu(`<div class="panel"><div class="pbody" style="padding-top:22px"><div class="big">Ziel erreicht</div><div class="sub">Alle ${NLEV} Level geschafft – du hast den Mond erreicht! Spielstand gespeichert, Auto repariert.</div>
+  showMenu(`<div class="panel"><div class="pbody" style="padding-top:22px"><div class="big">Ziel erreicht</div><div class="sub">Alle ${NLEV} Level geschafft – du hast den Rand des Universums erreicht! Spielstand gespeichert, Auto repariert.</div>
     <div class="kv" style="margin:18px auto 6px;width:fit-content"><b>Münzen</b><span>${save.coins} ${coinIcon}</span><b>Upgrades</b><span>${upg} / ${UPG.length * TMAX} Stufen</span><b>Kosmetik</b><span>${cos} / ${PAINTS.length + RIMS.length + RIMTYPES.length + CARS.length - 4} freigeschaltet</span></div></div>
-    <div class="pfoot"><button class="btn pri" data-act="finWs">Werkstatt</button><button class="btn" data-act="finLevels">Level wiederholen</button><button class="btn" data-act="wsClose">Weiterfahren</button></div></div>`);
+    <div class="pfoot"><button class="btn pri" data-act="finWs">Hangar</button><button class="btn" data-act="finLevels">Level wiederholen</button><button class="btn" data-act="wsClose">Weiterfahren</button></div></div>`);
 }
 function renderWS() {
   const uL = unlockedLevel(); let body = '';
@@ -1463,14 +1567,14 @@ function renderWS() {
       return `<button class="btn ${save.rimType === i ? 'sel' : ''}" data-act="rimtype" data-i="${i}">${p[0]}${own ? '' : '<br>' + p[1] + ' ' + coinIcon}</button>`; }).join('') + '</div>';
   } else body = levelsHTML();
   const tab = (id, n) => `<button class="btn ${wsTab === id ? 'sel' : ''}" data-act="tab" data-id="${id}">${n}</button>`;
-  showMenu(`<div class="panel"><h1>${wsLevel === NLEV - 1 ? 'Ziel erreicht' : 'Werkstatt'} · Level ${wsLevel + 1} geschafft</h1>
+  showMenu(`<div class="panel"><h1>${wsLevel === NLEV - 1 ? 'Ziel erreicht' : 'Hangar'} · Level ${wsLevel + 1} geschafft</h1>
     <div class="tabs">${tab('perf', 'Leistung')}${tab('cosm', 'Kosmetik')}${tab('lvls', 'Level')}<span style="margin-left:auto;color:#f5b83d;align-self:center;font-weight:700">${save.coins} ${coinIcon}</span></div>
     <div class="pbody">${wsTab === 'lvls' ? '' : '<div class="sub" style="margin-bottom:6px">Fortschritt gespeichert · Auto repariert</div>'}${body}</div>
     <div class="pfoot"><button class="btn pri" data-act="wsClose">Weiterfahren</button></div></div>`);
 }
 function levelsHTML() {
   const uL = unlockedLevel(), cur = levelAt(car.z) + 1; let h = '<div class="sub" style="margin-bottom:8px">Wiederhole freigeschaltete Level, um Münzen zu farmen.<br>Die Münzen des Levels erscheinen beim Start neu.</div>';
-  for (let w = 0; w < NW; w++) { h += `<h2 style="margin:12px 0 6px">${wlabel(WORLDS[w])}</h2><div class="lvg">`;
+  for (let w = 0; w < NW; w++) { h += `<h2 style="margin:12px 0 6px"><i class="pd" style="--c:${WORLDS[w].ui}"></i>${wlabel(WORLDS[w])}<span class="dm" style="font-weight:500;margin-left:auto">${gTxt(WORLDS[w].G)}${w === 0 ? ' · Boden 1–5, Wolken 6–20' : ''}</span></h2><div class="lvg">`;
     for (let n = w * 20 + 1; n <= w * 20 + 20; n++) { const ok = n <= uL; h += `<button class="btn ${n === cur ? 'sel' : ''}" style="box-shadow:inset 0 -3px 0 ${WORLDS[w].ui}" ${ok ? '' : 'disabled'} data-act="goLevel" data-n="${n}">${n}</button>`; }
     h += '</div>'; }
   return h;
@@ -1483,27 +1587,29 @@ function settingsHTML() {
     ${tg('touch', 'Touch-Steuerung (Overlay)')}${tg('shadows', 'Schatten')}${tg('sound', 'Sound')}
     <h2>Steuerung</h2><div class="kv"><b>W / ▲</b><span>Gas</span><b>S / ▼</b><span>Bremse / Rückwärts</span><b>A D / ◀ ▶</b><span>Lenken</span>
     <b>Leertaste</b><span>Halten = Sprung laden, loslassen = springen</span><b>Strg / C</b><span>Handbremse / Drift</span><b>Shift</b><span>Nitro (Motor Stufe 4)</span>
-    <b>R</b><span>Reset zur letzten Werkstatt · repariert</span><b>F</b><span>Werkstatt öffnen (nach einem Reset)</span><b>E</b><span>Dieses Menü öffnen / schließen</span></div>
-    <div class="sub" style="margin-top:10px;text-align:left">Ziel: Erreiche den Mond! Fahr durch die Werkstatt am Ende jedes Levels (Auto wird repariert) oder bleib darin stehen, um sie zu öffnen. Die Ziellinie wartet nach Level ${NLEV}. Sammle Münzen, kaufe Upgrades, meistere Kurven, Berge und die Wolken im Himmel.</div></div>
+    <b>R</b><span>Reset zum letzten Hangar · repariert</span><b>F</b><span>Hangar öffnen (nach einem Reset)</span><b>E</b><span>Dieses Menü öffnen / schließen</span></div>
+    <div class="sub" style="margin-top:10px;text-align:left">Ziel: Erreiche den Rand des Universums! Starte auf der Erde und hüpfe ab Level 6 von Wolke zu Wolke, später von Block zu Block durch das Sonnensystem und darüber hinaus. Jede Welt hat ihre eigene Schwerkraft: Sprünge werden weiter oder kürzer, Stürze weicher oder härter. Fahr durch den Hangar am Ende jedes Levels (Auto wird repariert) oder bleib darin stehen, um ihn zu öffnen. Die Ziellinie wartet nach Level ${NLEV}.</div></div>
     <div class="pfoot"><button class="btn pri" data-act="setClose">Fortsetzen</button><button class="btn" data-act="lvlsFromSet">Level wiederholen</button><button class="btn" data-act="acctFromSet">Konto</button>
     <button class="btn warn" data-act="${confirmNew ? 'newgame2' : 'newgame'}">${confirmNew ? 'Wirklich löschen?' : 'Neues Spiel'}</button></div></div>`;
 }
 function openSettings() { prevMode = mode; mode = 'settings'; confirmNew = false; showMenu(settingsHTML()); }
 function closeSettings() { hideMenu(); mode = prevMode === 'title' ? 'title' : 'play'; if (mode === 'title') showTitle(); }
 function backFromLevels() { if (levelsBack === 'title') { hideMenu(); showTitle(); } else if (levelsBack === 'settings') { mode = 'settings'; showMenu(settingsHTML()); } else { mode = 'ws'; renderWS(); } }
+function routeHTML() { const cur = Math.floor((unlockedLevel() - 1) / 20); return '<div class="route">' + WORLDS.map((Wd, i) => `<i class="pl${i === cur ? ' cur' : i < cur ? ' done' : ''}" style="--c:${Wd.ui}" title="${wlabel(Wd)}"></i>`).join('') + '</div>'; }
 function showTitle() {
-  mode = 'title'; const has = save.progress > 0 || save.coins > 0, gate = Cloud.gate();
-  if (gate) { showMenu(`<div class="start"><div class="kicker">Arcade Racer</div><h1>Race the Universe</h1>
-    <div class="tag">${NLEV} Level · ${NW} Welten · ein Ziel</div>
+  mode = 'title'; const has = save.progress > 0 || save.coins > 0, gate = Cloud.gate(), Wd = WORLDS[Math.floor((unlockedLevel() - 1) / 20)];
+  if (gate) { showMenu(`<div class="start"><div class="ttlwrap"><svg viewBox="0 0 600 140" aria-hidden="true"><path id="orbp" d="M300 70m-290 0a290 56 0 1 0 580 0a290 56 0 1 0-580 0" fill="none" stroke="rgba(95,220,255,.32)" stroke-width="1.4"/><circle r="4.5" fill="#fff"><animateMotion dur="16s" repeatCount="indefinite"><mpath href="#orbp"/></animateMotion></circle></svg><h1>Race the Universe</h1></div>
+    <div class="tag">Von der Erde bis zum Rand des Universums</div>${routeHTML()}
     ${gate === 'wait' ? '<button class="btn pri go" disabled>Verbinde …</button>' : '<button class="btn pri go" data-act="acctFromTitle">Anmelden</button>'}
     <div class="stat">Melde dich an, um zu spielen. Dein Spielstand wird in deinem Konto gespeichert.</div></div>`);
     ov.classList.add('ttl'); document.body.classList.add('is-title'); return; }
-  showMenu(`<div class="start"><div class="kicker">Arcade Racer</div><h1>Race the Universe</h1>
-    <div class="tag">${NLEV} Level · ${NW} Welten · ein Ziel</div>
+  showMenu(`<div class="start"><div class="ttlwrap"><svg viewBox="0 0 600 140" aria-hidden="true"><path id="orbp" d="M300 70m-290 0a290 56 0 1 0 580 0a290 56 0 1 0-580 0" fill="none" stroke="rgba(95,220,255,.32)" stroke-width="1.4"/><circle r="4.5" fill="#fff"><animateMotion dur="16s" repeatCount="indefinite"><mpath href="#orbp"/></animateMotion></circle></svg><h1>Race the Universe</h1></div>
+    <div class="tag">Von der Erde bis zum Rand des Universums</div>${routeHTML()}
     <button class="btn pri go" data-act="play">${has ? 'Weiterspielen' : 'Spielen'}</button>
     <div class="row2"><button class="btn" data-act="lvlsFromTitle">Level</button><button class="btn" data-act="settingsT">Einstellungen</button><button class="btn" data-act="acctFromTitle">Konto</button></div>
-    <div class="stat">Level ${unlockedLevel()} / ${NLEV} · ${save.coins} ${coinIcon}${Cloud.status()}</div>${has ? '<button class="lnk2" data-act="newgame">Neues Spiel</button>' : ''}</div>`);
+    <div class="stat"><i class="pd" style="--c:${Wd.ui}"></i>${wlabel(Wd)} · Level ${unlockedLevel()} / ${NLEV} · ${save.coins} ${coinIcon}${Cloud.status()}</div>${has ? '<button class="lnk2" data-act="newgame">Neues Spiel</button>' : ''}</div>`);
   ov.classList.add('ttl'); document.body.classList.add('is-title');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { const sv = ov.querySelector('svg'); if (sv && sv.pauseAnimations) sv.pauseAnimations(); }
 }
 function startPlay() { if (Cloud.gate()) return showTitle(); hideMenu(); mode = 'play'; respawnCheckpoint(true); car.lvl = -1; if (save.progress === 0) toast('W = Gas · A/D = Lenken<br>Leertaste halten & loslassen = Sprung', 5000); }
 function equipTier(id, i) { if (i < 0 || i > save.own[id] || i > TMAX || i === save.upg[id]) return; const up = i > save.upg[id]; save.upg[id] = i; calcStats(); car.hp = S.maxHp; saveGame(); Snd.tone(up ? 700 : 480, 0.1); renderWS(); }
@@ -1551,9 +1657,6 @@ function sanitizeSave(o) {
   r.paint = r.ownedPaints.includes(o.paint) ? o.paint : 0; r.rim = r.ownedRims.includes(o.rim) ? o.rim : 0; r.rimType = r.ownedRimTypes.includes(o.rimType) ? o.rimType : 0;
   r.settings = Object.assign({}, save.settings);
   return r;
-}
-function applySettings() {
-  pixelScale = 1; resize(); sun.castShadow = !!save.settings.shadows; $('touch').classList.toggle('on', !!save.settings.touch); $('gear').style.display = save.settings.touch ? 'none' : '';
 }
 /* ---------- Konto & Cloud-Speicherstand (Firebase Auth + Firestore) ---------- */
 const Cloud = (() => {
@@ -1704,6 +1807,9 @@ const Cloud = (() => {
   function gate() { if (!cfg) return null; if (user && ready) return null; if (loadErr || msg && !busy) return 'login'; if (!auth || !known || busy || (user && !ready && !conflict)) return 'wait'; return 'login'; }
   return { status, gate, back: goBack };
 })();
+function applySettings() {
+  pixelScale = 1; resize(); sun.castShadow = !!save.settings.shadows; $('touch').classList.toggle('on', !!save.settings.touch); $('gear').style.display = save.settings.touch ? 'none' : '';
+}
 setInterval(() => { if (dirty) saveGame(); }, 4000); addEventListener('beforeunload', saveGame);
 
 /* =====================================================================
